@@ -88,7 +88,7 @@
             MenuButton.Name = "MenuButton";
             MenuButton.Size = new Size(75, 23);
             MenuButton.TabIndex = 6;
-            MenuButton.Text = "Menu";
+            MenuButton.Text = "Back";
             MenuButton.UseVisualStyleBackColor = true;
             MenuButton.Click += MenuButton_Click;
             // 

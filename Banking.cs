@@ -21,7 +21,7 @@ namespace WinFormsBankingApp
             accounts.Add(new Account(Number1, Balance));
             String FileACC = Number1 + "," + Balance + "\n";
             File.AppendAllText(Acc_File_Path, FileACC);
-            MessageBox.Show(FileACC + "was added");
+            MessageBox.Show("===========================\nAdding Accountr:\nAccount: " + Number1 + "\nBalance: " + Balance + "\n \n \nThank You For Using Our Service!\n==========================="); ;
             ExitWithSave();
 
 

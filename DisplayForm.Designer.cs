@@ -30,8 +30,9 @@
         {
             label_Display_All = new Label();
             btn_Menu_DisplayAll = new Button();
-            listBox_DisplayALL = new ListBox();
             dataGridView1 = new DataGridView();
+            listBox_DisplayALL = new ListBox();
+            BtnAddRecord = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -51,28 +52,38 @@
             btn_Menu_DisplayAll.Name = "btn_Menu_DisplayAll";
             btn_Menu_DisplayAll.Size = new Size(75, 23);
             btn_Menu_DisplayAll.TabIndex = 1;
-            btn_Menu_DisplayAll.Text = "Menu";
+            btn_Menu_DisplayAll.Text = "Back";
             btn_Menu_DisplayAll.UseVisualStyleBackColor = true;
             btn_Menu_DisplayAll.Click += btn_Menu_DisplayAll_Click;
-            // 
-            // listBox_DisplayALL
-            // 
-            listBox_DisplayALL.FormattingEnabled = true;
-            listBox_DisplayALL.ItemHeight = 15;
-            listBox_DisplayALL.Location = new Point(394, 96);
-            listBox_DisplayALL.Name = "listBox_DisplayALL";
-            listBox_DisplayALL.Size = new Size(361, 319);
-            listBox_DisplayALL.TabIndex = 2;
-            listBox_DisplayALL.Click += listBox_DisplayALL_SelectedIndexChanged;
-            listBox_DisplayALL.SelectedIndexChanged += listBox_DisplayALL_SelectedIndexChanged;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(55, 96);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(240, 319);
+            dataGridView1.Size = new Size(694, 319);
             dataGridView1.TabIndex = 3;
+            // 
+            // listBox_DisplayALL
+            // 
+            listBox_DisplayALL.FormattingEnabled = true;
+            listBox_DisplayALL.ItemHeight = 15;
+            listBox_DisplayALL.Location = new Point(0, 446);
+            listBox_DisplayALL.Name = "listBox_DisplayALL";
+            listBox_DisplayALL.Size = new Size(10, 4);
+            listBox_DisplayALL.TabIndex = 2;
+            listBox_DisplayALL.Click += listBox_DisplayALL_SelectedIndexChanged;
+            listBox_DisplayALL.SelectedIndexChanged += listBox_DisplayALL_SelectedIndexChanged;
+            // 
+            // BtnAddRecord
+            // 
+            BtnAddRecord.Location = new Point(692, 48);
+            BtnAddRecord.Name = "BtnAddRecord";
+            BtnAddRecord.Size = new Size(85, 30);
+            BtnAddRecord.TabIndex = 4;
+            BtnAddRecord.Text = "Add New";
+            BtnAddRecord.UseVisualStyleBackColor = true;
+            BtnAddRecord.Click += BtnAddRecord_Click;
             // 
             // DisplayForm
             // 
@@ -80,6 +91,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
             ClientSize = new Size(800, 450);
+            Controls.Add(BtnAddRecord);
             Controls.Add(dataGridView1);
             Controls.Add(btn_Menu_DisplayAll);
             Controls.Add(label_Display_All);
@@ -96,7 +108,8 @@
 
         private Label label_Display_All;
         private Button btn_Menu_DisplayAll;
-        private ListBox listBox_DisplayALL;
         private DataGridView dataGridView1;
+        private ListBox listBox_DisplayALL;
+        private Button BtnAddRecord;
     }
 }
