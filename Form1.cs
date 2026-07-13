@@ -18,7 +18,9 @@ namespace WinFormsBankingApp
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            //Withdrawal button
+            Withdrawal withdrawal = new Withdrawal();
+            withdrawal.ShowDialog();
         }
 
 
@@ -39,12 +41,15 @@ namespace WinFormsBankingApp
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            // Deposit Button
+            Deposit deposit = new Deposit();   
+            deposit.ShowDialog();   
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            Banking.ExitWithSave();
+            this.Close();
         }
 
         private void button7_Click(object sender, EventArgs e)
