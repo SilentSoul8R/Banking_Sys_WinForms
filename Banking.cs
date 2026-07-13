@@ -3,7 +3,7 @@ namespace WinFormsBankingApp
 {
     class Banking
     {
-        static List<Account> accounts = new List<Account>();
+        public static List<Account> accounts = new List<Account>();
         //  static String Acc_File_Path = Path.Combine(Application.StartupPath, "Acc-File.txt");
         //static String Acc_File_Path = @"C:\Users\Muhammad.Abdullah.S\source\repos\WinFormsBankingApp";
         static String Acc_File_Path = @"C:\Users\Muhammad.Abdullah.S\source\repos\WinFormsBankingApp\WinFormsBankingApp\AccFile.txt";
