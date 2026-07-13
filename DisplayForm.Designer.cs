@@ -31,6 +31,8 @@
             label_Display_All = new Label();
             btn_Menu_DisplayAll = new Button();
             listBox_DisplayALL = new ListBox();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label_Display_All
@@ -57,12 +59,20 @@
             // 
             listBox_DisplayALL.FormattingEnabled = true;
             listBox_DisplayALL.ItemHeight = 15;
-            listBox_DisplayALL.Location = new Point(230, 99);
+            listBox_DisplayALL.Location = new Point(394, 96);
             listBox_DisplayALL.Name = "listBox_DisplayALL";
             listBox_DisplayALL.Size = new Size(361, 319);
             listBox_DisplayALL.TabIndex = 2;
             listBox_DisplayALL.Click += listBox_DisplayALL_SelectedIndexChanged;
             listBox_DisplayALL.SelectedIndexChanged += listBox_DisplayALL_SelectedIndexChanged;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(55, 96);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(240, 319);
+            dataGridView1.TabIndex = 3;
             // 
             // DisplayForm
             // 
@@ -70,11 +80,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
             ClientSize = new Size(800, 450);
-            Controls.Add(listBox_DisplayALL);
+            Controls.Add(dataGridView1);
             Controls.Add(btn_Menu_DisplayAll);
             Controls.Add(label_Display_All);
+            Controls.Add(listBox_DisplayALL);
             Name = "DisplayForm";
             Text = "DisplayForm";
+            Load += DisplayForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -84,5 +97,6 @@
         private Label label_Display_All;
         private Button btn_Menu_DisplayAll;
         private ListBox listBox_DisplayALL;
+        private DataGridView dataGridView1;
     }
 }

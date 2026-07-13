@@ -1,10 +1,10 @@
 ﻿namespace WinFormsBankingApp { 
 class Account
 {
-    public String Numbera;
-    public int Balance;
+        public string Numbera { get; set; }
+        public int Balance { get; set; }
 
-    public Account(String Numberp, int Initial)
+        public Account(String Numberp, int Initial)
     {
         Numbera = Numberp;
         Balance = Initial;
