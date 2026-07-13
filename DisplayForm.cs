@@ -16,7 +16,7 @@ namespace WinFormsBankingApp
         public DisplayForm()
         {
             InitializeComponent();
-            
+
         }
 
         private void listBox_DisplayALL_SelectedIndexChanged(object sender, EventArgs e)
@@ -31,7 +31,6 @@ namespace WinFormsBankingApp
 
         private void btn_Menu_DisplayAll_Click(object sender, EventArgs e)
         {
-
             this.Close();
         }
 
@@ -45,7 +44,16 @@ namespace WinFormsBankingApp
             Banking.LoadAccountsIntoList();
             dataGridView1.DataSource = Banking.LoadAccountsIntoList();
             dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
-            MessageBox.Show("Load fired");
+            
+        }
+
+        private void BtnAddRecord_Click(object sender, EventArgs e)
+        {
+            AddNewAccDisplay add = new AddNewAccDisplay();
+            add.ShowDialog();
+            Banking.LoadAccountsIntoList();
+            dataGridView1.DataSource = Banking.LoadAccountsIntoList();
+            dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
         }
     }
 }

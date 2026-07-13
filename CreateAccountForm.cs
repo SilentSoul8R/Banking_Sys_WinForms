@@ -58,7 +58,7 @@ namespace WinFormsBankingApp
 
         private void btnCreateAccYes_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The account you are creating is: " + textBoxGetACCNUM.Text + "," + textBoxCreateACCBalance.Text);
+           
             try
             {
                 int temp_balance_create_acc = Convert.ToInt32(textBoxCreateACCBalance.Text);                    // kept insdie the try-catch block as non numeric will give error when converting.
@@ -73,6 +73,7 @@ namespace WinFormsBankingApp
         private void btnBack_CreateAcc_Click(object sender, EventArgs e)
         {
             Banking.ExitWithSave();
+       
             this.Close();
 
         }
