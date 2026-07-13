@@ -30,6 +30,7 @@ namespace WinFormsBankingApp
 
         private void btn_Menu_DisplayAll_Click(object sender, EventArgs e)
         {
+            
             this.Close();
         }
     }

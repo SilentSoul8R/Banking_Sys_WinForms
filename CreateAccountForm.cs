@@ -72,6 +72,7 @@ namespace WinFormsBankingApp
 
         private void btnBack_CreateAcc_Click(object sender, EventArgs e)
         {
+            Banking.ExitWithSave();
             this.Close();
 
         }
