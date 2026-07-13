@@ -10,6 +10,11 @@ This project simulates the core operations of a retail bank through a lightweigh
 
 ---
 
+<img width="815" height="490" alt="image" src="https://github.com/user-attachments/assets/b52fa320-b7a3-48d8-b787-d5ce4af1e8ab" />
+
+
+---
+
 ## ✨ Features
 
 | Feature | Description |
