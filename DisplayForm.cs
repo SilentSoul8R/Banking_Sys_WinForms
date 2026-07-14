@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,16 +35,13 @@ namespace WinFormsBankingApp
             this.Close();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void DisplayForm_Load(object sender, EventArgs e)
         {
             Banking.LoadAccountsIntoList();
             dataGridView1.DataSource = Banking.LoadAccountsIntoList();
             dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
+            dataGridView1.Columns["Numbera"].Width = 170;
+            dataGridView1.Columns["Balance"].Width = 170;
             
         }
 
@@ -54,6 +52,38 @@ namespace WinFormsBankingApp
             Banking.LoadAccountsIntoList();
             dataGridView1.DataSource = Banking.LoadAccountsIntoList();
             dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+
+            dataGridView1.Columns["Numbera"].DisplayIndex = 0;
+            dataGridView1.Columns["Balance"].DisplayIndex = 1;
+            dataGridView1.Columns["Column1"].DisplayIndex = 2;
+            dataGridView1.Columns["Column2"].DisplayIndex = 3;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Column2")
+            {
+                
+                string accNum = Interaction.InputBox("Enter account number (acc1 == 1):", "Delete Account", "");
+                int accNumero = Convert.ToInt32(accNum);
+                Banking.Remove(accNumero);
+                Banking.LoadAccountsIntoList();
+                dataGridView1.DataSource = Banking.LoadAccountsIntoList();
+                dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
+            }
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "Column1")
+            {
+                FormEditRecord record = new FormEditRecord();
+                record.ShowDialog();
+                Banking.LoadAccountsIntoList();
+                dataGridView1.DataSource = Banking.LoadAccountsIntoList();
+                dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
+            }
         }
     }
 }
