@@ -33,6 +33,8 @@
             dataGridView1 = new DataGridView();
             listBox_DisplayALL = new ListBox();
             BtnAddRecord = new Button();
+            Column1 = new DataGridViewButtonColumn();
+            Column2 = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -59,10 +61,13 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2 });
             dataGridView1.Location = new Point(55, 96);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(694, 319);
             dataGridView1.TabIndex = 3;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
             // 
             // listBox_DisplayALL
             // 
@@ -84,6 +89,22 @@
             BtnAddRecord.Text = "Add New";
             BtnAddRecord.UseVisualStyleBackColor = true;
             BtnAddRecord.Click += BtnAddRecord_Click;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Edit";
+            Column1.Name = "Column1";
+            Column1.Text = "Edit";
+            Column1.UseColumnTextForButtonValue = true;
+            Column1.Width = 150;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Delete";
+            Column2.Name = "Column2";
+            Column2.Text = "Delete";
+            Column2.UseColumnTextForButtonValue = true;
+            Column2.Width = 150;
             // 
             // DisplayForm
             // 
@@ -111,5 +132,7 @@
         private DataGridView dataGridView1;
         private ListBox listBox_DisplayALL;
         private Button BtnAddRecord;
+        private DataGridViewButtonColumn Column1;
+        private DataGridViewButtonColumn Column2;
     }
 }
