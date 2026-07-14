@@ -16,6 +16,9 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormEditRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Withdrawal.cs">
       <SubType>Form</SubType>
     </Compile>
