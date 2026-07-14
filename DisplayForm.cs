@@ -42,6 +42,12 @@ namespace WinFormsBankingApp
             dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
             dataGridView1.Columns["Numbera"].Width = 170;
             dataGridView1.Columns["Balance"].Width = 170;
+            int total = 0;
+            foreach (var x in Banking.accounts)
+            {
+                total = total + x.Balance;
+            }
+            MessageBox.Show("The Total Amount of Money in the Bank is: " + total + "$");
             
         }
 
