@@ -17,6 +17,11 @@ namespace WinFormsBankingApp
                 MessageBox.Show("The account already exists");
                 return;
             }
+            if (Balance < 0)
+            {
+                MessageBox.Show("Negative balance is not allowed");
+                return;
+            }
 
             accounts.Add(new Account(Number1, Balance));
             String FileACC = Number1 + "," + Balance + "\n";
@@ -34,12 +39,14 @@ namespace WinFormsBankingApp
                                                                                  // Line inside the Brackets is a Lambda Function, 
             if (acc == null)
             {
-                throw new Exception("File not found");         // using throw instead of readline for this, as form can catch exception
+                throw new Exception("This Account does not Exist!");         // using throw instead of readline for this, as form can catch exception
                 return;
             }
 
             acc.Balance += Bal;
+            MessageBox.Show("===========================\nDeposit:\nAccount: " + numb + "\nAmount: " + Bal + "\n \n \nThank You For Using Our Service!\n===========================");
 
+            Banking.ExitWithSave();
 
         }
 
@@ -57,12 +64,17 @@ namespace WinFormsBankingApp
             {
                 if (Bal > acc.Balance)
                 {
-                    throw new Exception("You dont have enough money to do this deposit");
-
+ 
+                    MessageBox.Show("Not Enought Money in the Account");
+                    return;
                 }
                 else
                 {
                     acc.Balance -= Bal;
+                    MessageBox.Show("===========================\nWithdrawal:\nAccount: " + numb + "\nAmount: " + Bal + "\n \n \nThank You For Using Our Service!\n===========================");
+
+                    Banking.ExitWithSave();
+
 
                 }
             }
@@ -98,13 +110,18 @@ namespace WinFormsBankingApp
             return AllAccounts;
         }
 
-        public static void Remove(int Accnumb)
+        public static void Remove(string Accnumb)
         {
 
             try
             {
-                String acc1 = accounts[Accnumb - 1].Convert_To_Str();                         // first, we make a string of the name from the list, if it doesnt exist, we will trigger the exception.
-                accounts.Remove(accounts[Accnumb - 1]);                                       // now since it exists, we can remove that index from the list.
+               foreach (var x in accounts)
+                {
+                    if (x.Numbera == Accnumb)
+                    {
+                        accounts.Remove(x);  //That specific message — "Collection was modified; enumeration operation may not execute" — always means the same thing: somewhere, a foreach loop is actively going through a list, and while it's still looping, some other code adds or removes an item from that exact same list. foreach doesn't tolerate that; it throws rather than risk skipping/reprocessing items.
+                    }
+                }                                    // now since it exists, we can remove that index from the list.
                                                                                               // Console.WriteLine("The following account was removed: " + acc1);              // -1 at index because 3rd acount points to 2nd index.
             }
             catch (ArgumentOutOfRangeException x)   //changed to ArgumentOutOfRangeException from IndexOutOfRangeException as it will not catch the one sent, which was actullay the Argument one. i was calling the wroing one.

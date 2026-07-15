@@ -31,10 +31,11 @@
             label_Display_All = new Label();
             btn_Menu_DisplayAll = new Button();
             dataGridView1 = new DataGridView();
-            listBox_DisplayALL = new ListBox();
-            BtnAddRecord = new Button();
             Column1 = new DataGridViewButtonColumn();
             Column2 = new DataGridViewButtonColumn();
+            listBox_DisplayALL = new ListBox();
+            BtnAddRecord = new Button();
+            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             // 
             label_Display_All.AutoSize = true;
             label_Display_All.Font = new Font("Century Schoolbook", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_Display_All.Location = new Point(157, 50);
+            label_Display_All.Location = new Point(163, 45);
             label_Display_All.Name = "label_Display_All";
             label_Display_All.Size = new Size(501, 28);
             label_Display_All.TabIndex = 0;
@@ -69,6 +70,22 @@
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
             // 
+            // Column1
+            // 
+            Column1.HeaderText = "Edit";
+            Column1.Name = "Column1";
+            Column1.Text = "Edit";
+            Column1.UseColumnTextForButtonValue = true;
+            Column1.Width = 150;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Delete";
+            Column2.Name = "Column2";
+            Column2.Text = "Delete";
+            Column2.UseColumnTextForButtonValue = true;
+            Column2.Width = 150;
+            // 
             // listBox_DisplayALL
             // 
             listBox_DisplayALL.FormattingEnabled = true;
@@ -90,21 +107,13 @@
             BtnAddRecord.UseVisualStyleBackColor = true;
             BtnAddRecord.Click += BtnAddRecord_Click;
             // 
-            // Column1
+            // textBox1
             // 
-            Column1.HeaderText = "Edit";
-            Column1.Name = "Column1";
-            Column1.Text = "Edit";
-            Column1.UseColumnTextForButtonValue = true;
-            Column1.Width = 150;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Delete";
-            Column2.Name = "Column2";
-            Column2.Text = "Delete";
-            Column2.UseColumnTextForButtonValue = true;
-            Column2.Width = 150;
+            textBox1.Location = new Point(33, 55);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 5;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // DisplayForm
             // 
@@ -112,6 +121,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
             ClientSize = new Size(800, 450);
+            Controls.Add(textBox1);
             Controls.Add(BtnAddRecord);
             Controls.Add(dataGridView1);
             Controls.Add(btn_Menu_DisplayAll);
@@ -134,5 +144,6 @@
         private Button BtnAddRecord;
         private DataGridViewButtonColumn Column1;
         private DataGridViewButtonColumn Column2;
+        private TextBox textBox1;
     }
 }

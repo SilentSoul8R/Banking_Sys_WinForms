@@ -49,14 +49,14 @@
             // 
             // textBoxWithdrawal
             // 
-            textBoxWithdrawal.Location = new Point(220, 306);
+            textBoxWithdrawal.Location = new Point(225, 274);
             textBoxWithdrawal.Name = "textBoxWithdrawal";
             textBoxWithdrawal.Size = new Size(376, 23);
             textBoxWithdrawal.TabIndex = 10;
             // 
             // textBoxAccWithdrawal
             // 
-            textBoxAccWithdrawal.Location = new Point(220, 178);
+            textBoxAccWithdrawal.Location = new Point(225, 146);
             textBoxAccWithdrawal.Name = "textBoxAccWithdrawal";
             textBoxAccWithdrawal.Size = new Size(376, 23);
             textBoxAccWithdrawal.TabIndex = 9;
@@ -65,7 +65,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(220, 255);
+            label2.Location = new Point(225, 223);
             label2.Name = "label2";
             label2.Size = new Size(311, 20);
             label2.TabIndex = 8;
@@ -76,7 +76,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(220, 128);
+            label1.Location = new Point(225, 96);
             label1.Name = "label1";
             label1.Size = new Size(206, 20);
             label1.TabIndex = 7;

@@ -63,6 +63,7 @@ namespace WinFormsBankingApp
             {
                 int temp_balance_create_acc = Convert.ToInt32(textBoxCreateACCBalance.Text);                    // kept insdie the try-catch block as non numeric will give error when converting.
                 Banking.Create(textBoxGetACCNUM.Text, temp_balance_create_acc);                                 // default is private, in C#, so add public in front of functions we are gonna use in another file.
+                Banking.ExitWithSave();
             }
             catch (Exception ex)
             {

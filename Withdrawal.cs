@@ -26,17 +26,38 @@ namespace WinFormsBankingApp
         {
             try
             {
+                if (textBoxAccWithdrawal.Text == "")
+                {
+                    MessageBox.Show("Missing Account Number\nRETRY");
+                    return;
+                }
+                if (textBoxWithdrawal.Text == "")
+                {
+                    MessageBox.Show("Missing Amount\nRETRY");
+                    return;
+
+                }
+
                 String Accnumero = textBoxAccWithdrawal.Text;
                 string amount = textBoxWithdrawal.Text;
                 int Withdrawal = Convert.ToInt32(textBoxWithdrawal.Text);
+
+                if (Withdrawal < 0)
+                {
+                    MessageBox.Show("Negative Amount Not Allowed");
+                    return;
+                }
+
+
+
                 Banking.Withdrawal(Accnumero, Withdrawal);
-                MessageBox.Show("===========================\nWithdrawal:\nAccount: " + Accnumero + "\nAmount: " + amount + "\n \n \nThank You For Using Our Service!\n===========================");
 
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 MessageBox.Show(ex.Message);
             }
+          
         }
 
         private void MenuButton_Click(object sender, EventArgs e)
