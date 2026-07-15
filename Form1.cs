@@ -8,7 +8,17 @@ namespace WinFormsBankingApp
         public Form1()
         {
             InitializeComponent();
-            Banking.LoadAccounts(); 
+            Banking.LoadAccounts();
+            int total = 0;
+            total = Banking.accounts.Count;
+            label3Form1.Text = total + " Users trust us";
+            int totalmoney = 0;
+            foreach(Account account in Banking.accounts)
+            {
+                totalmoney = totalmoney + account.Balance;
+            }
+            string convertedamount = totalmoney.ToString("C0");
+            label3Form1Balance.Text = @"Total Money in the Bank: " + convertedamount;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -35,18 +45,18 @@ namespace WinFormsBankingApp
                     return;
                 }
                 MessageBox.Show("The account: " + accNum + " is going to be removed");
-               // int temp_accNum_Delete = Convert.ToInt32(accNum);
+                // int temp_accNum_Delete = Convert.ToInt32(accNum);
                 Banking.Remove(accNum);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DisplayForm DisplayForm = new DisplayForm();    
+            DisplayForm DisplayForm = new DisplayForm();
             DisplayForm.ShowDialog();
 
         }
@@ -54,8 +64,8 @@ namespace WinFormsBankingApp
         private void button4_Click(object sender, EventArgs e)
         {
             // Deposit Button
-            Deposit deposit = new Deposit();   
-            deposit.ShowDialog();   
+            Deposit deposit = new Deposit();
+            deposit.ShowDialog();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -76,5 +86,7 @@ namespace WinFormsBankingApp
 
 
         }
+
+        
     }
 }

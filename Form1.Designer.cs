@@ -37,6 +37,9 @@
             button5 = new Button();
             button6 = new Button();
             button7 = new Button();
+            label2 = new Label();
+            label3Form1 = new Label();
+            label3Form1Balance = new Label();
             SuspendLayout();
             // 
             // label1
@@ -119,6 +122,33 @@
             button7.UseVisualStyleBackColor = true;
             button7.Click += button7_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(547, 384);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 8;
+            label2.Text = "label2";
+            // 
+            // label3Form1
+            // 
+            label3Form1.AutoSize = true;
+            label3Form1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3Form1.Location = new Point(575, 57);
+            label3Form1.Name = "label3Form1";
+            label3Form1.Size = new Size(0, 20);
+            label3Form1.TabIndex = 9;
+            // 
+            // label3Form1Balance
+            // 
+            label3Form1Balance.AutoSize = true;
+            label3Form1Balance.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3Form1Balance.Location = new Point(575, 94);
+            label3Form1Balance.Name = "label3Form1Balance";
+            label3Form1Balance.Size = new Size(0, 17);
+            label3Form1Balance.TabIndex = 10;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -126,6 +156,9 @@
             BackColor = Color.White;
             BackgroundImage = Properties.Resources.Background__1_;
             ClientSize = new Size(800, 450);
+            Controls.Add(label3Form1Balance);
+            Controls.Add(label3Form1);
+            Controls.Add(label2);
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -152,5 +185,8 @@
         private Button button5;
         private Button button6;
         private Button button7;
+        private Label label2;
+        private Label label3Form1;
+        private Label label3Form1Balance;
     }
 }

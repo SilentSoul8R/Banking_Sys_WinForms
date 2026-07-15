@@ -35,7 +35,6 @@
             Column2 = new DataGridViewButtonColumn();
             listBox_DisplayALL = new ListBox();
             BtnAddRecord = new Button();
-            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -107,21 +106,12 @@
             BtnAddRecord.UseVisualStyleBackColor = true;
             BtnAddRecord.Click += BtnAddRecord_Click;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(33, 55);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 5;
-            textBox1.TextChanged += textBox1_TextChanged;
-            // 
             // DisplayForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
             ClientSize = new Size(800, 450);
-            Controls.Add(textBox1);
             Controls.Add(BtnAddRecord);
             Controls.Add(dataGridView1);
             Controls.Add(btn_Menu_DisplayAll);
@@ -144,6 +134,5 @@
         private Button BtnAddRecord;
         private DataGridViewButtonColumn Column1;
         private DataGridViewButtonColumn Column2;
-        private TextBox textBox1;
     }
 }
