@@ -25,8 +25,21 @@ namespace WinFormsBankingApp
 
         private void btnCreateAccYesDisplay_Click(object sender, EventArgs e)
         {
+            lblMessage.Text = "Your account is created successfully";
+            return;
             try
             {
+                //Camel Casing, Pascal Casing, what is it?
+                //Local variables, method arguments, camelCasing
+                //Class Name, Namespace name, Method Name
+
+                string firstName = "";
+                if (textBoxGetACCNUM.Text == "")
+                {
+                    MessageBox.Show("Please enter account number");
+                    return;
+                }
+
                 String Accnumero = textBoxGetACCNUM.Text;
                 string BalanceStr = textBoxCreateACCBalance.Text;
                 int BalanceFR = Convert.ToInt32(BalanceStr);
@@ -40,6 +53,15 @@ namespace WinFormsBankingApp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+    }
+
+    class Person
+    {
+        public string SayHello(string name, string message)
+        {
+            string result = "Hello " + name + ", " + message;
+            return result;
         }
     }
 }

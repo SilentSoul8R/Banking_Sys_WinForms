@@ -34,6 +34,7 @@
             textBoxCreateACCBalance = new TextBox();
             btnCreateAccYesDisplay = new Button();
             btnBack_CreateAcc = new Button();
+            lblMessage = new Label();
             SuspendLayout();
             // 
             // textBoxGetACCNUM
@@ -91,12 +92,22 @@
             btnBack_CreateAcc.UseVisualStyleBackColor = true;
             btnBack_CreateAcc.Click += btnBack_CreateAcc_Click;
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.Font = new Font("Segoe UI", 15F);
+            lblMessage.Location = new Point(283, 52);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(0, 28);
+            lblMessage.TabIndex = 16;
+            // 
             // AddNewAccDisplay
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblMessage);
             Controls.Add(btnBack_CreateAcc);
             Controls.Add(btnCreateAccYesDisplay);
             Controls.Add(textBoxCreateACCBalance);
@@ -117,5 +128,6 @@
         private TextBox textBoxCreateACCBalance;
         private Button btnCreateAccYesDisplay;
         private Button btnBack_CreateAcc;
+        private Label lblMessage;
     }
 }

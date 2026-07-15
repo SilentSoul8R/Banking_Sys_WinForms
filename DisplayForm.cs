@@ -48,7 +48,7 @@ namespace WinFormsBankingApp
                 total = total + x.Balance;
             }
             MessageBox.Show("The Total Amount of Money in the Bank is: " + total + "$");
-            
+
         }
 
         private void BtnAddRecord_Click(object sender, EventArgs e)
@@ -71,13 +71,13 @@ namespace WinFormsBankingApp
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Column2")
             {
-                
+
                 string accNum = Interaction.InputBox("Enter account number (acc1 == 1):", "Delete Account", "");
                 int accNumero = Convert.ToInt32(accNum);
-                Banking.Remove(accNumero);
+                Banking.Remove(accNum);
                 Banking.LoadAccountsIntoList();
                 dataGridView1.DataSource = Banking.LoadAccountsIntoList();
                 dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
@@ -90,6 +90,11 @@ namespace WinFormsBankingApp
                 dataGridView1.DataSource = Banking.LoadAccountsIntoList();
                 dataGridView1.Columns["Numbera"].HeaderText = "Account Number";
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

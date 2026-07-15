@@ -26,11 +26,23 @@ namespace WinFormsBankingApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string accNum = Interaction.InputBox("Enter account number: \nPlease Enter the account Number Only (1 for Acc1): ", "Delete Account", "");
-            MessageBox.Show("The account: " + accNum + " is going to be removed");
-            int temp_accNum_Delete = Convert.ToInt32(accNum);
-            Banking.Remove(temp_accNum_Delete);
-        }
+            try
+            {
+                string accNum = Interaction.InputBox("Enter account number: \nPlease Enter the account Number: ", "Delete Account", "");
+                if (accNum == "")
+                {
+                    MessageBox.Show("Missing Account Number\nRETRY");
+                    return;
+                }
+                MessageBox.Show("The account: " + accNum + " is going to be removed");
+               // int temp_accNum_Delete = Convert.ToInt32(accNum);
+                Banking.Remove(accNum);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            }
 
         private void button3_Click(object sender, EventArgs e)
         {

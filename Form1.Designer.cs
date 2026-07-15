@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             label1 = new Label();
             btnCreateAccount = new Button();
             button2 = new Button();
@@ -74,7 +75,7 @@
             button3.Name = "button3";
             button3.Size = new Size(150, 50);
             button3.TabIndex = 3;
-            button3.Text = "Display All";
+            button3.Text = "View All Accounts";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
@@ -84,7 +85,7 @@
             button4.Name = "button4";
             button4.Size = new Size(150, 50);
             button4.TabIndex = 4;
-            button4.Text = "Deposit Cash";
+            button4.Text = "Add Money";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
@@ -94,7 +95,7 @@
             button5.Name = "button5";
             button5.Size = new Size(150, 50);
             button5.TabIndex = 5;
-            button5.Text = "Withdraw Cash";
+            button5.Text = "Withdraw Money";
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
@@ -133,6 +134,7 @@
             Controls.Add(button2);
             Controls.Add(btnCreateAccount);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;

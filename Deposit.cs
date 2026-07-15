@@ -28,12 +28,30 @@ namespace WinFormsBankingApp
         {
             try
             {
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Missing Account Number\nRETRY");
+                    return;
+                }
+                if (textBox2.Text == "")
+                {
+                    MessageBox.Show("Missing Amount\nRETRY");
+                    return;
+
+                }
                 String Accnumero = textBox1.Text;
                 string deposit = textBox2.Text;
                 int depositFR = Convert.ToInt32(textBox2.Text);
+
+
+                if (depositFR < 0)
+                {
+                    MessageBox.Show("Negative Amount Not Allowed");
+                    return;
+                }
+
                 Banking.Deposit(Accnumero, depositFR);
-                MessageBox.Show("===========================\nDeposit:\nAccount: " + Accnumero + "\nAmount: " + depositFR + "\n \n \nThank You For Using Our Service!\n===========================");
-                
+
             }
             catch (Exception ex) 
             {
