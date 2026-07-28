@@ -30,11 +30,8 @@
         {
             button1 = new Button();
             button2 = new Button();
+            checkedListBox1 = new CheckedListBox();
             label1 = new Label();
-            checkBoxAccNum = new CheckBox();
-            checkBoxAccTitle = new CheckBox();
-            checkBoxCnic = new CheckBox();
-            checkBoxBalance = new CheckBox();
             SuspendLayout();
             // 
             // button1
@@ -45,7 +42,6 @@
             button1.TabIndex = 0;
             button1.Text = "Select";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -57,6 +53,15 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // checkedListBox1
+            // 
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Items.AddRange(new object[] { "Account Number", "Account Title", "Cnic", "Balance" });
+            checkedListBox1.Location = new Point(21, 102);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(120, 76);
+            checkedListBox1.TabIndex = 2;
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -67,57 +72,14 @@
             label1.TabIndex = 3;
             label1.Text = "Select Filters for the Next Search";
             // 
-            // checkBoxAccNum
-            // 
-            checkBoxAccNum.AutoSize = true;
-            checkBoxAccNum.Location = new Point(21, 85);
-            checkBoxAccNum.Name = "checkBoxAccNum";
-            checkBoxAccNum.Size = new Size(120, 19);
-            checkBoxAccNum.TabIndex = 4;
-            checkBoxAccNum.Text = "Account-Number";
-            checkBoxAccNum.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAccTitle
-            // 
-            checkBoxAccTitle.AutoSize = true;
-            checkBoxAccTitle.Location = new Point(21, 110);
-            checkBoxAccTitle.Name = "checkBoxAccTitle";
-            checkBoxAccTitle.Size = new Size(98, 19);
-            checkBoxAccTitle.TabIndex = 5;
-            checkBoxAccTitle.Text = "Account-Title";
-            checkBoxAccTitle.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxCnic
-            // 
-            checkBoxCnic.AutoSize = true;
-            checkBoxCnic.Location = new Point(21, 135);
-            checkBoxCnic.Name = "checkBoxCnic";
-            checkBoxCnic.Size = new Size(50, 19);
-            checkBoxCnic.TabIndex = 6;
-            checkBoxCnic.Text = "Cnic";
-            checkBoxCnic.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxBalance
-            // 
-            checkBoxBalance.AutoSize = true;
-            checkBoxBalance.Location = new Point(21, 160);
-            checkBoxBalance.Name = "checkBoxBalance";
-            checkBoxBalance.Size = new Size(67, 19);
-            checkBoxBalance.TabIndex = 7;
-            checkBoxBalance.Text = "Balance";
-            checkBoxBalance.UseVisualStyleBackColor = true;
-            // 
             // Filters
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(234, 261);
-            Controls.Add(checkBoxBalance);
-            Controls.Add(checkBoxCnic);
-            Controls.Add(checkBoxAccTitle);
-            Controls.Add(checkBoxAccNum);
             Controls.Add(label1);
+            Controls.Add(checkedListBox1);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "Filters";
@@ -130,10 +92,7 @@
 
         private Button button1;
         private Button button2;
+        private CheckedListBox checkedListBox1;
         private Label label1;
-        private CheckBox checkBoxAccNum;
-        private CheckBox checkBoxAccTitle;
-        private CheckBox checkBoxCnic;
-        private CheckBox checkBoxBalance;
     }
 }

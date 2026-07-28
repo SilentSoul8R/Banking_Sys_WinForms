@@ -16,10 +16,10 @@ namespace WinFormsBankingApp
         private readonly string accountNumber;
         private int balanceOld;
 
-        public FormEditRecord()
-        {
-            InitializeComponent();
-        }
+      //  public FormEditRecord()
+      //  {
+      //      InitializeComponent();
+      //  }
 
         public FormEditRecord(String accNum, int balance)
         {

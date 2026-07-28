@@ -71,7 +71,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { AccountNumber, AccountTitle, Cnic, Balance, Column1, Column2 });
             dataGridView1.Location = new Point(55, 158);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(702, 306);
+            dataGridView1.Size = new Size(694, 306);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -119,7 +119,7 @@
             // 
             // BtnAddRecord
             // 
-            BtnAddRecord.Location = new Point(682, 48);
+            BtnAddRecord.Location = new Point(692, 48);
             BtnAddRecord.Name = "BtnAddRecord";
             BtnAddRecord.Size = new Size(85, 30);
             BtnAddRecord.TabIndex = 4;
@@ -129,11 +129,10 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(55, 101);
+            textBoxSearch.Location = new Point(67, 100);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.Size = new Size(609, 23);
             textBoxSearch.TabIndex = 5;
-            textBoxSearch.KeyDown += textBoxSearch_KeyDown;
             // 
             // btnSearch
             // 
@@ -144,7 +143,6 @@
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
-            btnSearch.KeyDown += btnSearch_KeyDown;
             // 
             // Filters
             // 
