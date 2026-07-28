@@ -1,5 +1,5 @@
 ﻿namespace WinFormsBankingApp { 
-class Account
+public class Account
 {
         public string accountNumber { get; set; }
 

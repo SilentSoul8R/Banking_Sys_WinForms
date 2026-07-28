@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,14 @@ namespace WinFormsBankingApp
 {
     public partial class DisplayForm : Form
     {
+
+        public string accNum = "";
+        public string accTitle = "";
+        public string accCnic = "";
+
+        public string queryFirstHalf = "Select * From tblAccounts";
+        public string querySecondHalf = "";
+        public string queryFinal = "";
 
         public DisplayForm()
         {
@@ -117,15 +126,15 @@ namespace WinFormsBankingApp
         private void RefreshGrid(string search = "")
         {
 
-            dataGridView1.DataSource = Banking.LoadAccountsIntoList(search);
+            dataGridView1.DataSource = FilteredLoadIntoGrid();
 
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = FilteredLoadIntoGrid();
 
-
-            RefreshGrid(textBoxSearch.Text);                   // i created this method, because originally i was calling two lines, with the same parameters. that was useless, i didnt need the first line, a method made it easier to change
+            //  RefreshGrid(textBoxSearch.Text);                   // i created this method, because originally i was calling two lines, with the same parameters. that was useless, i didnt need the first line, a method made it easier to change
         }
 
         private void Filters_Click(object sender, EventArgs e)
@@ -148,6 +157,122 @@ namespace WinFormsBankingApp
 
         //  }
 
+        //public List<Account> FilteredLoadIntoGrid()
+        //{
+        //  accNum = textBoxAccNum.Text;
+        //  accTitle = textBoxAccTitle.Text;
+        //  accCnic = textBoxAccCnic.Text;
+
+            //  if (accNum != "" && querySecondHalf.Length == 0)
+            //  {
+            //      querySecondHalf = "AccNum LIKE @accnum";
+            //  }
+
+            //   if (accNum != "" && querySecondHalf != "")
+            //   {
+            //       querySecondHalf = querySecondHalf + " AND AccNum LIKE @accnum";
+            //   }
+
+            //  if (accTitle != "" && querySecondHalf != "")
+            //  {
+            //     querySecondHalf = querySecondHalf + " AND AccTitle LIKE @acctitle";
+            //  }
+
+            //  if (accTitle != "" && querySecondHalf.Length == 0)
+            //  {
+            //      querySecondHalf = "AccTitle LIKE @acctitle";
+            //  }
+
+
+            //  if (accCnic != "" && querySecondHalf != "")
+            //  {
+            //      querySecondHalf = querySecondHalf + " AND Cnic LIKE @acccnic";
+            //  }
+
+            //  if (accCnic != "" && querySecondHalf.Length == 0)
+            //  {
+            //      querySecondHalf = "Cnic LIKE @acccnic";
+            //  }
+
+
+
+            //  if (querySecondHalf == "")
+            //  {
+            //      queryFinal = queryFirstHalf + " ;";
+            //      MessageBox.Show(queryFinal);
+            //  }
+            //  else
+            //  {
+            //      queryFinal = queryFirstHalf + " WHERE " + querySecondHalf + " ;";
+            //      MessageBox.Show(queryFinal);
+
+            //  }
+            //  }
+        
+        public List<Account> FilteredLoadIntoGrid()
+        {
+            string accNum = textBoxAccNum.Text;
+            string accTitle = textBoxAccTitle.Text;
+            string accCnic = textBoxAccCnic.Text;
+
+            var conditions = new List<string>();          // starts fresh every call so we can make the string again and again
+ 
+            if (accNum != "")                             // these will make it so that we dont have to individualy make em, we can just pick those we have gotten, and just add these. with add comes separators
+            {
+                conditions.Add("AccNum LIKE @accnum");    // we can add all these to a list, then add them in the end, by AND as separator
+            }
+
+            if (accTitle != "")
+            {
+                conditions.Add("AccTitle LIKE @acctitle");        
+            }
+
+            if (accCnic != "")
+            {
+                conditions.Add("Cnic LIKE @acccnic");
+            }
+
+            string queryFirstHalf = "SELECT * FROM tblAccounts";  // better to handle ";" inside the string builder
+            string queryFinal; 
+
+            if (conditions.Count == 0)              // if no conditions, a vanila search
+            {
+                queryFinal = queryFirstHalf + ";"; 
+            }
+            else
+            {
+                queryFinal = queryFirstHalf + " WHERE " + string.Join(" AND ", conditions) + ";";
+            }
+
+            var accounts = new List<Account>();
+
+            using var connection = new SqlConnection(DbHelper.connectionString);     // normal setting a connection
+            connection.Open();
+
+            using var command = new SqlCommand(queryFinal, connection);  // command is the search query here
+
+            if (accNum != "")  // 
+                command.Parameters.AddWithValue("@accnum", "%" + accNum + "%");
+
+            if (accTitle != "")
+                command.Parameters.AddWithValue("@acctitle", "%" + accTitle + "%");
+
+            if (accCnic != "")
+                command.Parameters.AddWithValue("@acccnic", "%" + accCnic + "%");
+
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                accounts.Add(new Account(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));  // here is the filtered search
+            }
+
+            return accounts;
+        }
+    }
 
     }
-}
+
+    
+
+
+ 

@@ -175,45 +175,48 @@ namespace WinFormsBankingApp
 
         
 
-        public static List<Account> LoadAccountsIntoList(string search = "")  //search for filtering         //implemented this funciton still as the program still relies on list to run, eg displaying data to the grid.
-        {
-            var accounts = new List<Account>();
-
-            using var connection = new SqlConnection(DbHelper.connectionString);
-            connection.Open();
-            
-            if (search == "")
-            {
-                querySearch = "SELECT AccNum, AccTitle, Cnic, Balance  FROM tblAccounts;";   //the normal string 
-               
-                                                             
-            }
-            else if (search != "")
-            {
-                querySearch = "SELECT AccNum, AccTitle, Cnic, Balance  FROM tblAccounts WHERE AccNum LIKE @search;";  // the one that can be used for filtering
-
-                
-            }
-
-            using var select = new SqlCommand(querySearch, connection);
-            if (search != "")
-            {
-                select.Parameters.AddWithValue("@search", "%" + search + "%");   // this worked becuase we are assigning a value to an thing made outside this scope, if it was not outside and inside, then asgining parameters outside aws not possible
-            }
-
-            using var reader = select.ExecuteReader();
-
-            while (reader.Read())                                                                           /*The condition being evaluated in while (reader.Read()) is the return value of reader.Read() itself — Read() is a method that returns a bool.
-                                                                                                              Every time you call reader.Read():
-                                                                                                              -It moves the reader's internal cursor forward to the next row in the result set
-                                                                                                              -It returns true if there was a next row to move to
-                                                                                                              -It returns false if there were no more rows left */
-                {
-                    accounts.Add(new Account(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
-                }
-            return accounts;
-
-
-        }
+       //  public static List<Account> LoadAccountsIntoList(string search = "")  //search for filtering         //implemented this funciton still as the program still relies on list to run, eg displaying data to the grid.
+       //  {
+       //      var accounts = new List<Account>();
+       //
+       //      using var connection = new SqlConnection(DbHelper.connectionString);
+       //      connection.Open();
+       //      
+       //      if (search == "")
+       //      {
+       //          querySearch = "SELECT AccNum, AccTitle, Cnic, Balance  FROM tblAccounts;";   //the normal string 
+       //         
+       //                                                       
+       //      }
+       //      else if (search != "")
+       //      {
+       //          querySearch = "SELECT AccNum, AccTitle, Cnic, Balance  FROM tblAccounts WHERE AccNum LIKE @search;";  // the one that can be used for filtering
+       //
+       //          
+       //      }
+       //
+       //     using var select = new SqlCommand(querySearch, connection);
+       //     if (search != "")
+       //     {
+       //         select.Parameters.AddWithValue("@search", "%" + search + "%");   // this worked becuase we are assigning a value to an thing made outside this scope, if it was not outside and inside, then asgining parameters outside aws not possible
+       //     }
+       //
+       //    using var reader = select.ExecuteReader();
+       //
+       //     while (reader.Read())                                                                           /*The condition being evaluated in while (reader.Read()) is the return value of reader.Read() itself — Read() is a method that returns a bool.
+       //                                                                                                       Every time you call reader.Read():
+       //                                                                                                       -It moves the reader's internal cursor forward to the next row in the result set
+       //                                                                                                       -It returns true if there was a next row to move to
+       //                                                                                                      -It returns false if there were no more rows left */
+       //         {
+       //            accounts.Add(new Account(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+       //         }
+       //     return accounts;
+       //
+       //
+       // }
+       //
+       // public static void FilteredLoadIntoList() { 
+       // }
     }
 }
