@@ -63,7 +63,7 @@
             // 
             // textBoxCreateACCBalance
             // 
-            textBoxCreateACCBalance.Location = new Point(159, 319);
+            textBoxCreateACCBalance.Location = new Point(711, 367);
             textBoxCreateACCBalance.Name = "textBoxCreateACCBalance";
             textBoxCreateACCBalance.Size = new Size(484, 23);
             textBoxCreateACCBalance.TabIndex = 19;
@@ -81,7 +81,7 @@
             // 
             // textBoxAccNumEdit
             // 
-            textBoxAccNumEdit.Location = new Point(159, 96);
+            textBoxAccNumEdit.Location = new Point(96, 166);
             textBoxAccNumEdit.Name = "textBoxAccNumEdit";
             textBoxAccNumEdit.Size = new Size(484, 23);
             textBoxAccNumEdit.TabIndex = 23;
@@ -90,7 +90,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(159, 60);
+            label1.Location = new Point(96, 129);
             label1.Name = "label1";
             label1.Size = new Size(138, 20);
             label1.TabIndex = 22;
@@ -98,7 +98,7 @@
             // 
             // textBoxTakeCnicEdit
             // 
-            textBoxTakeCnicEdit.Location = new Point(159, 246);
+            textBoxTakeCnicEdit.Location = new Point(96, 367);
             textBoxTakeCnicEdit.Name = "textBoxTakeCnicEdit";
             textBoxTakeCnicEdit.Size = new Size(484, 23);
             textBoxTakeCnicEdit.TabIndex = 27;
@@ -107,7 +107,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(159, 211);
+            label5.Location = new Point(96, 332);
             label5.Name = "label5";
             label5.Size = new Size(132, 20);
             label5.TabIndex = 26;
@@ -115,7 +115,7 @@
             // 
             // textBoxTakeAccountTitleEdit
             // 
-            textBoxTakeAccountTitleEdit.Location = new Point(159, 170);
+            textBoxTakeAccountTitleEdit.Location = new Point(711, 164);
             textBoxTakeAccountTitleEdit.Name = "textBoxTakeAccountTitleEdit";
             textBoxTakeAccountTitleEdit.Size = new Size(484, 23);
             textBoxTakeAccountTitleEdit.TabIndex = 25;
@@ -124,7 +124,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(159, 135);
+            label4.Location = new Point(711, 129);
             label4.Name = "label4";
             label4.Size = new Size(187, 20);
             label4.TabIndex = 24;
@@ -135,7 +135,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1298, 582);
             Controls.Add(textBoxTakeCnicEdit);
             Controls.Add(label5);
             Controls.Add(textBoxTakeAccountTitleEdit);

@@ -55,7 +55,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(159, 310);
+            label2.Location = new Point(711, 332);
             label2.Name = "label2";
             label2.Size = new Size(286, 20);
             label2.TabIndex = 2;
@@ -63,7 +63,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(159, 345);
+            textBox2.Location = new Point(711, 367);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(484, 23);
             textBox2.TabIndex = 4;
@@ -72,7 +72,7 @@
             // btnCreateAccYes
             // 
             btnCreateAccYes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCreateAccYes.Location = new Point(297, 378);
+            btnCreateAccYes.Location = new Point(560, 498);
             btnCreateAccYes.Name = "btnCreateAccYes";
             btnCreateAccYes.Size = new Size(168, 60);
             btnCreateAccYes.TabIndex = 5;
@@ -83,7 +83,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(159, 112);
+            label1.Location = new Point(96, 206);
             label1.Name = "label1";
             label1.Size = new Size(202, 15);
             label1.TabIndex = 18;
@@ -92,7 +92,7 @@
             // comboBoxAddMoney
             // 
             comboBoxAddMoney.FormattingEnabled = true;
-            comboBoxAddMoney.Location = new Point(159, 72);
+            comboBoxAddMoney.Location = new Point(96, 166);
             comboBoxAddMoney.Name = "comboBoxAddMoney";
             comboBoxAddMoney.Size = new Size(484, 23);
             comboBoxAddMoney.TabIndex = 17;
@@ -101,7 +101,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(159, 35);
+            label3.Location = new Point(96, 129);
             label3.Name = "label3";
             label3.Size = new Size(214, 20);
             label3.TabIndex = 16;
@@ -109,7 +109,7 @@
             // 
             // textBoxTakeCnicDeposit
             // 
-            textBoxTakeCnicDeposit.Location = new Point(159, 269);
+            textBoxTakeCnicDeposit.Location = new Point(96, 367);
             textBoxTakeCnicDeposit.Name = "textBoxTakeCnicDeposit";
             textBoxTakeCnicDeposit.Size = new Size(484, 23);
             textBoxTakeCnicDeposit.TabIndex = 22;
@@ -118,7 +118,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(159, 234);
+            label5.Location = new Point(96, 332);
             label5.Name = "label5";
             label5.Size = new Size(132, 20);
             label5.TabIndex = 21;
@@ -126,7 +126,7 @@
             // 
             // textBoxTakeAccountTitleDeposit
             // 
-            textBoxTakeAccountTitleDeposit.Location = new Point(159, 187);
+            textBoxTakeAccountTitleDeposit.Location = new Point(711, 164);
             textBoxTakeAccountTitleDeposit.Name = "textBoxTakeAccountTitleDeposit";
             textBoxTakeAccountTitleDeposit.Size = new Size(484, 23);
             textBoxTakeAccountTitleDeposit.TabIndex = 20;
@@ -135,7 +135,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(159, 152);
+            label4.Location = new Point(711, 129);
             label4.Name = "label4";
             label4.Size = new Size(187, 20);
             label4.TabIndex = 19;
@@ -145,8 +145,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Background__1_;
-            ClientSize = new Size(800, 450);
+            BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
+            ClientSize = new Size(1298, 582);
             Controls.Add(textBoxTakeCnicDeposit);
             Controls.Add(label5);
             Controls.Add(textBoxTakeAccountTitleDeposit);

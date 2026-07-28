@@ -74,7 +74,7 @@
             // comboBoxAddMoney
             // 
             comboBoxAddMoney.FormattingEnabled = true;
-            comboBoxAddMoney.Location = new Point(162, 74);
+            comboBoxAddMoney.Location = new Point(96, 166);
             comboBoxAddMoney.Name = "comboBoxAddMoney";
             comboBoxAddMoney.Size = new Size(484, 23);
             comboBoxAddMoney.TabIndex = 22;
@@ -83,7 +83,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(162, 37);
+            label3.Location = new Point(96, 129);
             label3.Name = "label3";
             label3.Size = new Size(214, 20);
             label3.TabIndex = 21;
@@ -91,7 +91,7 @@
             // 
             // textBoxWithdrawal
             // 
-            textBoxWithdrawal.Location = new Point(162, 339);
+            textBoxWithdrawal.Location = new Point(711, 367);
             textBoxWithdrawal.Name = "textBoxWithdrawal";
             textBoxWithdrawal.Size = new Size(484, 23);
             textBoxWithdrawal.TabIndex = 20;
@@ -108,7 +108,7 @@
             // 
             // textBoxTakeCnicWithdraw
             // 
-            textBoxTakeCnicWithdraw.Location = new Point(162, 264);
+            textBoxTakeCnicWithdraw.Location = new Point(96, 367);
             textBoxTakeCnicWithdraw.Name = "textBoxTakeCnicWithdraw";
             textBoxTakeCnicWithdraw.Size = new Size(484, 23);
             textBoxTakeCnicWithdraw.TabIndex = 27;
@@ -117,7 +117,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(162, 229);
+            label5.Location = new Point(96, 332);
             label5.Name = "label5";
             label5.Size = new Size(132, 20);
             label5.TabIndex = 26;
@@ -125,7 +125,7 @@
             // 
             // textBoxTakeAccountTitleWithdraw
             // 
-            textBoxTakeAccountTitleWithdraw.Location = new Point(162, 182);
+            textBoxTakeAccountTitleWithdraw.Location = new Point(711, 164);
             textBoxTakeAccountTitleWithdraw.Name = "textBoxTakeAccountTitleWithdraw";
             textBoxTakeAccountTitleWithdraw.Size = new Size(484, 23);
             textBoxTakeAccountTitleWithdraw.TabIndex = 25;
@@ -134,7 +134,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(162, 147);
+            label4.Location = new Point(711, 129);
             label4.Name = "label4";
             label4.Size = new Size(187, 20);
             label4.TabIndex = 24;
@@ -145,7 +145,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1298, 582);
             Controls.Add(textBoxTakeCnicWithdraw);
             Controls.Add(label5);
             Controls.Add(textBoxTakeAccountTitleWithdraw);
