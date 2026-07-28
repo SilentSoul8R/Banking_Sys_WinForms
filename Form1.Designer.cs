@@ -31,22 +31,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             label1 = new Label();
             btnCreateAccount = new Button();
-            button2 = new Button();
             button3 = new Button();
             button4 = new Button();
             button5 = new Button();
-            button6 = new Button();
             button7 = new Button();
-            label2 = new Label();
             label3Form1 = new Label();
             label3Form1Balance = new Label();
+            menuStrip1 = new MenuStrip();
+            accountsToolStripMenuItem = new ToolStripMenuItem();
+            createAccountToolStripMenuItem = new ToolStripMenuItem();
+            viewAllAccountsToolStripMenuItem = new ToolStripMenuItem();
+            transactionsToolStripMenuItem = new ToolStripMenuItem();
+            addMoneyToolStripMenuItem = new ToolStripMenuItem();
+            withdrawMoneyToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(274, 43);
+            label1.Location = new Point(284, 57);
             label1.Name = "label1";
             label1.Size = new Size(257, 32);
             label1.TabIndex = 0;
@@ -54,7 +59,7 @@
             // 
             // btnCreateAccount
             // 
-            btnCreateAccount.Location = new Point(330, 94);
+            btnCreateAccount.Location = new Point(330, 132);
             btnCreateAccount.Name = "btnCreateAccount";
             btnCreateAccount.Size = new Size(150, 50);
             btnCreateAccount.TabIndex = 1;
@@ -62,19 +67,9 @@
             btnCreateAccount.UseVisualStyleBackColor = true;
             btnCreateAccount.Click += btnCreateAccount_Click;
             // 
-            // button2
-            // 
-            button2.Location = new Point(330, 150);
-            button2.Name = "button2";
-            button2.Size = new Size(150, 50);
-            button2.TabIndex = 2;
-            button2.Text = "Remove Account";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // button3
             // 
-            button3.Location = new Point(330, 206);
+            button3.Location = new Point(330, 188);
             button3.Name = "button3";
             button3.Size = new Size(150, 50);
             button3.TabIndex = 3;
@@ -84,7 +79,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(330, 262);
+            button4.Location = new Point(330, 244);
             button4.Name = "button4";
             button4.Size = new Size(150, 50);
             button4.TabIndex = 4;
@@ -94,7 +89,7 @@
             // 
             // button5
             // 
-            button5.Location = new Point(330, 318);
+            button5.Location = new Point(330, 300);
             button5.Name = "button5";
             button5.Size = new Size(150, 50);
             button5.TabIndex = 5;
@@ -102,34 +97,15 @@
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
-            // button6
-            // 
-            button6.Location = new Point(108, 376);
-            button6.Name = "button6";
-            button6.Size = new Size(150, 50);
-            button6.TabIndex = 6;
-            button6.Text = "Exit and Save";
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
-            // 
             // button7
             // 
-            button7.Location = new Point(539, 376);
+            button7.Location = new Point(330, 356);
             button7.Name = "button7";
             button7.Size = new Size(150, 50);
             button7.TabIndex = 7;
             button7.Text = "Exit";
             button7.UseVisualStyleBackColor = true;
             button7.Click += button7_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(547, 384);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 8;
-            label2.Text = "label2";
             // 
             // label3Form1
             // 
@@ -149,6 +125,58 @@
             label3Form1Balance.Size = new Size(0, 17);
             label3Form1Balance.TabIndex = 10;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { accountsToolStripMenuItem, transactionsToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.TabIndex = 11;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // accountsToolStripMenuItem
+            // 
+            accountsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { createAccountToolStripMenuItem, viewAllAccountsToolStripMenuItem });
+            accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
+            accountsToolStripMenuItem.Size = new Size(69, 20);
+            accountsToolStripMenuItem.Text = "Accounts";
+            accountsToolStripMenuItem.Click += accountsToolStripMenuItem_Click;
+            // 
+            // createAccountToolStripMenuItem
+            // 
+            createAccountToolStripMenuItem.Name = "createAccountToolStripMenuItem";
+            createAccountToolStripMenuItem.Size = new Size(169, 22);
+            createAccountToolStripMenuItem.Text = "Create Account";
+            createAccountToolStripMenuItem.Click += createAccountToolStripMenuItem_Click_1;
+            // 
+            // viewAllAccountsToolStripMenuItem
+            // 
+            viewAllAccountsToolStripMenuItem.Name = "viewAllAccountsToolStripMenuItem";
+            viewAllAccountsToolStripMenuItem.Size = new Size(169, 22);
+            viewAllAccountsToolStripMenuItem.Text = "View All Accounts";
+            viewAllAccountsToolStripMenuItem.Click += viewAllAccountsToolStripMenuItem_Click_1;
+            // 
+            // transactionsToolStripMenuItem
+            // 
+            transactionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addMoneyToolStripMenuItem, withdrawMoneyToolStripMenuItem });
+            transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
+            transactionsToolStripMenuItem.Size = new Size(84, 20);
+            transactionsToolStripMenuItem.Text = "Transactions";
+            // 
+            // addMoneyToolStripMenuItem
+            // 
+            addMoneyToolStripMenuItem.Name = "addMoneyToolStripMenuItem";
+            addMoneyToolStripMenuItem.Size = new Size(165, 22);
+            addMoneyToolStripMenuItem.Text = "Add Money";
+            addMoneyToolStripMenuItem.Click += addMoneyToolStripMenuItem_Click_1;
+            // 
+            // withdrawMoneyToolStripMenuItem
+            // 
+            withdrawMoneyToolStripMenuItem.Name = "withdrawMoneyToolStripMenuItem";
+            withdrawMoneyToolStripMenuItem.Size = new Size(165, 22);
+            withdrawMoneyToolStripMenuItem.Text = "Withdraw Money";
+            withdrawMoneyToolStripMenuItem.Click += withdrawMoneyToolStripMenuItem_Click_1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -158,19 +186,19 @@
             ClientSize = new Size(800, 450);
             Controls.Add(label3Form1Balance);
             Controls.Add(label3Form1);
-            Controls.Add(label2);
             Controls.Add(button7);
-            Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
-            Controls.Add(button2);
             Controls.Add(btnCreateAccount);
             Controls.Add(label1);
+            Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -179,14 +207,18 @@
 
         private Label label1;
         private Button btnCreateAccount;
-        private Button button2;
         private Button button3;
         private Button button4;
         private Button button5;
-        private Button button6;
         private Button button7;
-        private Label label2;
         private Label label3Form1;
         private Label label3Form1Balance;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem accountsToolStripMenuItem;
+        private ToolStripMenuItem createAccountToolStripMenuItem;
+        private ToolStripMenuItem viewAllAccountsToolStripMenuItem;
+        private ToolStripMenuItem transactionsToolStripMenuItem;
+        private ToolStripMenuItem addMoneyToolStripMenuItem;
+        private ToolStripMenuItem withdrawMoneyToolStripMenuItem;
     }
 }

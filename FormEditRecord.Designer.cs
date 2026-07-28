@@ -32,8 +32,12 @@
             btnCreateAccYesEdit = new Button();
             textBoxCreateACCBalance = new TextBox();
             label2 = new Label();
+            textBoxAccNumEdit = new TextBox();
             label1 = new Label();
-            textBoxGetACCNUM = new TextBox();
+            textBoxTakeCnicEdit = new TextBox();
+            label5 = new Label();
+            textBoxTakeAccountTitleEdit = new TextBox();
+            label4 = new Label();
             SuspendLayout();
             // 
             // btnBack_CreateAcc
@@ -49,7 +53,7 @@
             // btnCreateAccYesEdit
             // 
             btnCreateAccYesEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCreateAccYesEdit.Location = new Point(298, 356);
+            btnCreateAccYesEdit.Location = new Point(296, 366);
             btnCreateAccYesEdit.Name = "btnCreateAccYesEdit";
             btnCreateAccYesEdit.Size = new Size(168, 60);
             btnCreateAccYesEdit.TabIndex = 20;
@@ -59,7 +63,7 @@
             // 
             // textBoxCreateACCBalance
             // 
-            textBoxCreateACCBalance.Location = new Point(163, 248);
+            textBoxCreateACCBalance.Location = new Point(159, 319);
             textBoxCreateACCBalance.Name = "textBoxCreateACCBalance";
             textBoxCreateACCBalance.Size = new Size(484, 23);
             textBoxCreateACCBalance.TabIndex = 19;
@@ -69,28 +73,62 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(163, 212);
+            label2.Location = new Point(159, 283);
             label2.Name = "label2";
             label2.Size = new Size(148, 20);
             label2.TabIndex = 18;
             label2.Text = "Enter the Balance:\r\n";
             // 
+            // textBoxAccNumEdit
+            // 
+            textBoxAccNumEdit.Location = new Point(159, 96);
+            textBoxAccNumEdit.Name = "textBoxAccNumEdit";
+            textBoxAccNumEdit.Size = new Size(484, 23);
+            textBoxAccNumEdit.TabIndex = 23;
+            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(163, 113);
+            label1.Location = new Point(159, 60);
             label1.Name = "label1";
-            label1.Size = new Size(213, 20);
-            label1.TabIndex = 17;
-            label1.Text = "Enter the Account Number:";
+            label1.Size = new Size(138, 20);
+            label1.TabIndex = 22;
+            label1.Text = "Account Number:";
             // 
-            // textBoxGetACCNUM
+            // textBoxTakeCnicEdit
             // 
-            textBoxGetACCNUM.Location = new Point(163, 149);
-            textBoxGetACCNUM.Name = "textBoxGetACCNUM";
-            textBoxGetACCNUM.Size = new Size(484, 23);
-            textBoxGetACCNUM.TabIndex = 16;
+            textBoxTakeCnicEdit.Location = new Point(159, 246);
+            textBoxTakeCnicEdit.Name = "textBoxTakeCnicEdit";
+            textBoxTakeCnicEdit.Size = new Size(484, 23);
+            textBoxTakeCnicEdit.TabIndex = 27;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(159, 211);
+            label5.Name = "label5";
+            label5.Size = new Size(132, 20);
+            label5.TabIndex = 26;
+            label5.Text = "Enter the CNIC:\r\n";
+            // 
+            // textBoxTakeAccountTitleEdit
+            // 
+            textBoxTakeAccountTitleEdit.Location = new Point(159, 170);
+            textBoxTakeAccountTitleEdit.Name = "textBoxTakeAccountTitleEdit";
+            textBoxTakeAccountTitleEdit.Size = new Size(484, 23);
+            textBoxTakeAccountTitleEdit.TabIndex = 25;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(159, 135);
+            label4.Name = "label4";
+            label4.Size = new Size(187, 20);
+            label4.TabIndex = 24;
+            label4.Text = "Enter the Account Title:\r\n";
             // 
             // FormEditRecord
             // 
@@ -98,14 +136,19 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
             ClientSize = new Size(800, 450);
+            Controls.Add(textBoxTakeCnicEdit);
+            Controls.Add(label5);
+            Controls.Add(textBoxTakeAccountTitleEdit);
+            Controls.Add(label4);
+            Controls.Add(textBoxAccNumEdit);
+            Controls.Add(label1);
             Controls.Add(btnBack_CreateAcc);
             Controls.Add(btnCreateAccYesEdit);
             Controls.Add(textBoxCreateACCBalance);
             Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(textBoxGetACCNUM);
             Name = "FormEditRecord";
             Text = "FormEditRecord";
+            Load += FormEditRecord_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -116,7 +159,11 @@
         private Button btnCreateAccYesEdit;
         private TextBox textBoxCreateACCBalance;
         private Label label2;
+        private TextBox textBoxAccNumEdit;
         private Label label1;
-        private TextBox textBoxGetACCNUM;
+        private TextBox textBoxTakeCnicEdit;
+        private Label label5;
+        private TextBox textBoxTakeAccountTitleEdit;
+        private Label label4;
     }
 }

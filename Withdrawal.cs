@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,11 +27,14 @@ namespace WinFormsBankingApp
         {
             try
             {
-                if (textBoxAccWithdrawal.Text == "")
+                if (comboBoxAddMoney.SelectedItem == null)
                 {
-                    MessageBox.Show("Missing Account Number\nRETRY");
+                    MessageBox.Show("Please select an account");
                     return;
                 }
+
+                string accNum = comboBoxAddMoney.SelectedItem.ToString();
+
                 if (textBoxWithdrawal.Text == "")
                 {
                     MessageBox.Show("Missing Amount\nRETRY");
@@ -38,7 +42,23 @@ namespace WinFormsBankingApp
 
                 }
 
-                String Accnumero = textBoxAccWithdrawal.Text;
+                if (textBoxTakeAccountTitleWithdraw.Text == "")
+                {
+                    MessageBox.Show("Missing Account Title\nRETRY");
+                    return;
+
+                }
+
+                if (textBoxTakeCnicWithdraw.Text == "")
+                {
+                    MessageBox.Show("Missing Cnic Number\nRETRY");
+                    return;
+
+                }
+
+                String accNumber = accNum;                          // added above by the drop down box
+                string accTitle = textBoxTakeAccountTitleWithdraw.Text;
+                string accCnic = textBoxTakeCnicWithdraw.Text;
                 string amount = textBoxWithdrawal.Text;
                 int Withdrawal = Convert.ToInt32(textBoxWithdrawal.Text);
 
@@ -50,20 +70,43 @@ namespace WinFormsBankingApp
 
 
 
-                Banking.Withdrawal(Accnumero, Withdrawal);
+                Banking.Withdrawal(accNumber, accTitle, accCnic, Withdrawal);
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-          
+
         }
 
         private void MenuButton_Click(object sender, EventArgs e)
         {
-            Banking.ExitWithSave();
             this.Close();
+        }
+
+        private void Withdrawal_Load(object sender, EventArgs e)
+        {
+            LoadIntoDropBox();
+        }
+
+        private void LoadIntoDropBox()
+        {
+            comboBoxAddMoney.Items.Clear();
+
+            using var connection = new SqlConnection(DbHelper.connectionString);
+            connection.Open();
+
+            using var command = new SqlCommand(
+                "SELECT AccNum FROM tblAccounts;",        // this sql command gives us the list, but sorted
+                connection);
+            using var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                comboBoxAddMoney.Items.Add(reader.GetString(0));
+
+            }
         }
     }
 }

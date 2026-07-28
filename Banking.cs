@@ -1,68 +1,120 @@
 ﻿
+using Microsoft.Data.SqlClient;
+using System.Net.Http.Headers;
+using System.Windows.Forms;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+
+
 namespace WinFormsBankingApp
 {
+    
     class Banking
     {
+
+        public static string querySearch = "";
+        //Class BankAccount
+        //Variable name firstName
+        //First_Name
+        //FIRSTNAME
+        //parameter camelCasing
+        //Local variables camelCasin
+        //Function names Pascal Casing
+
         public static List<Account> accounts = new List<Account>();
-        //  static String Acc_File_Path = Path.Combine(Application.StartupPath, "Acc-File.txt");
-        //static String Acc_File_Path = @"C:\Users\Muhammad.Abdullah.S\source\repos\WinFormsBankingApp";
-        static String Acc_File_Path = @"C:\Users\Muhammad.Abdullah.S\source\repos\WinFormsBankingApp\WinFormsBankingApp\AccFile.txt";
+        
+        static String accFilePath = @"C:\Users\Muhammad.Abdullah.S\source\repos\WinFormsBankingApp\WinFormsBankingApp\AccFile.txt";
 
 
-        public static void Create(string Number1, int Balance)
+        public static void Create(string accNumber, string accTitle, String cnic, int balance)
         {
-
-            if (accounts.Any(a => a.Numbera == Number1))
-            {
-                MessageBox.Show("The account already exists");
-                return;
-            }
-            if (Balance < 0)
+            // so basically, now we have to convert all this to SQL based working, so basically when we search all accounts, we are just looking at select * to display all and check whether a app exists. Same we can give new record as insert in with values we have
+            if (balance < 0)
             {
                 MessageBox.Show("Negative balance is not allowed");
                 return;
             }
 
-            accounts.Add(new Account(Number1, Balance));
-            String FileACC = Number1 + "," + Balance + "\n";
-            File.AppendAllText(Acc_File_Path, FileACC);
-            MessageBox.Show("===========================\nAdding Accountr:\nAccount: " + Number1 + "\nBalance: " + Balance + "\n \n \nThank You For Using Our Service!\n==========================="); ;
-            ExitWithSave();
+            // since we check this before opening anything, we open database after this
+            using var connection = new SqlConnection(DbHelper.connectionString);
+            connection.Open();
+
+
+            using var check = new SqlCommand("SELECT COUNT(*) FROM tblAccounts WHERE AccNum = @value;", connection);                 //first we made a query, then we gave it parameters, now we are gonna run it
+            check.Parameters.AddWithValue(@"value", accNumber);
+            int exist = (int) check.ExecuteScalar();                         // we execute the query here
+            
+            if (exist >  0)
+            {
+                MessageBox.Show("The account already exists");
+                return;
+            }
+
+            using var querytoInsertAcc = new SqlCommand("INSERT INTO tblAccounts (AccNum, AccTitle, Cnic, Balance) VALUES (@accNum, @accTitle, @cnic, @balance);", connection);
+            querytoInsertAcc.Parameters.AddWithValue(@"accNum", accNumber);
+            querytoInsertAcc.Parameters.AddWithValue(@"accTitle", accTitle);
+            querytoInsertAcc.Parameters.AddWithValue(@"cnic", cnic);
+            querytoInsertAcc.Parameters.AddWithValue(@"balance", balance);
+            querytoInsertAcc.ExecuteNonQuery();
+
+            MessageBox.Show("===========================\nAdding Accountr:\nAccount: " + accNumber + "\nAccount Title:" + accTitle + "\nCnic:" + cnic + "\nBalance: " + balance + "\n \n \nThank You For Using Our Service!\n==========================="); ;
+            
 
 
         }
 
-        public static void Deposit(string numb, int Bal)
+        public static void Deposit(string numb, string title, string cnic, int bal)
         {
+            // negatiove balance check is made in form
 
-            var acc = accounts.FirstOrDefault(a => a.Numbera == numb);           // part of Language Integrated Query, LINQ, The firstordefault and ANy is part of it.
-                                                                                 // Line inside the Brackets is a Lambda Function, 
-            if (acc == null)
+            using var connection = new SqlConnection(DbHelper.connectionString);
+            connection.Open();
+
+            using var checkExist = new SqlCommand("SELECT COUNT(*) FROM tblAccounts WHERE AccNum = @AccNum;", connection);
+            checkExist.Parameters.AddWithValue(@"AccNum", numb);
+            int count = (int) checkExist.ExecuteScalar();
+
+      
+                                                                             
+            if (count == 0)
             {
                 throw new Exception("This Account does not Exist!");         // using throw instead of readline for this, as form can catch exception
                 return;
             }
 
-            acc.Balance += Bal;
-            MessageBox.Show("===========================\nDeposit:\nAccount: " + numb + "\nAmount: " + Bal + "\n \n \nThank You For Using Our Service!\n===========================");
+            using var updateBalanceQuery = new SqlCommand("UPDATE tblAccounts SET Balance = Balance + @deposit WHERE AccNum = @accnumb AND AccTitle = @title AND Cnic = @cnic;", connection);
+            updateBalanceQuery.Parameters.AddWithValue(@"accnumb", numb);
+            updateBalanceQuery.Parameters.AddWithValue(@"accTitle", title);
+            updateBalanceQuery.Parameters.AddWithValue(@"cnic", cnic);
+            updateBalanceQuery.Parameters.AddWithValue(@"deposit", bal);
+            updateBalanceQuery.ExecuteNonQuery();
 
-            Banking.ExitWithSave();
+            MessageBox.Show("===========================\nDeposit:\nAccount: " + numb + "\nAccount Title:" + title + "\nCnic:" + cnic + "\nBalance: " + bal + "\n \n \nThank You For Using Our Service!\n===========================");
+
 
         }
 
-        public static void Withdrawal(string numb, int Bal)
+        public static void Withdrawal(string numb, string title, string cnic, int amt)
         {
+            using var connection = new  SqlConnection(DbHelper.connectionString);
+            connection.Open();
 
-            var acc = accounts.FirstOrDefault(a => a.Numbera == numb);
-            if (acc == null)
+            using var checkExist = new SqlCommand("SELECT COUNT(*) FROM tblAccounts WHERE AccNum = @AccNum;", connection);
+            checkExist.Parameters.AddWithValue(@"AccNum", numb);
+            int count = (int)checkExist.ExecuteScalar();
+                                                                                                                  //basically if count of accounts with that number is 0, then no accounts exist.
+            if (count == 0)
             {
                 throw new Exception("Account not found");
                 return;
             }
 
+            using var getBalance = new SqlCommand("SELECT Balance FROM tblAccounts WHERE AccNum = @acc;", connection);
+            getBalance.Parameters.AddWithValue(@"acc", numb);
+            int balanceDB = (int) getBalance.ExecuteScalar();
+
             try
             {
-                if (Bal > acc.Balance)
+                if (amt > balanceDB)
                 {
  
                     MessageBox.Show("Not Enought Money in the Account");
@@ -70,10 +122,17 @@ namespace WinFormsBankingApp
                 }
                 else
                 {
-                    acc.Balance -= Bal;
-                    MessageBox.Show("===========================\nWithdrawal:\nAccount: " + numb + "\nAmount: " + Bal + "\n \n \nThank You For Using Our Service!\n===========================");
+                    using var queryWithdrawCash = new SqlCommand("UPDATE tblAccounts SET Balance = Balance - @amt WhERE AccNum = @numb AND AccTitle = @title AND Cnic = @cnic;", connection);
+                    queryWithdrawCash.Parameters.AddWithValue(@"amt", amt);
+                    queryWithdrawCash.Parameters.AddWithValue(@"title", title);
+                    queryWithdrawCash.Parameters.AddWithValue(@"cnic", cnic);
+                    queryWithdrawCash.Parameters.AddWithValue(@"numb", numb);
+                    queryWithdrawCash.ExecuteNonQuery();
 
-                    Banking.ExitWithSave();
+
+                    MessageBox.Show("===========================\nWithdrawal:\nAccount: " + numb + "\nAccount Title:" + title + "\nAmount: " + amt + "\n \n \nThank You For Using Our Service!\n===========================");
+
+                    
 
 
                 }
@@ -89,130 +148,72 @@ namespace WinFormsBankingApp
             }
 
         }
-        public static List<string> DisplayAll()   // instead of looping, we have to make a List of the accounts, that can be shown in a ListBox
+
+        //public static void Remove(string accnumb, string title, string cnic)
+        public static void Remove(string accnumb)
         {
-            List<string> AllAccounts = new List<string>();
+            using var connection = new SqlConnection(DbHelper.connectionString);
+            connection.Open();
 
-            if (accounts.Count == 0)
+            // simply just use the query to delete the account, no more needed, for my satisfation, i will make a check to see if it actually exists or not.
+
+            using var checkExist = new SqlCommand("SELECT COUNT(*) FROM tblAccounts WHERE AccNum = @AccNum;", connection);        //if the count is zero, that means that account doesn't exist
+            checkExist.Parameters.AddWithValue(@"AccNum", accnumb);                                                       
+            int count = (int)checkExist.ExecuteScalar();
+
+            if (count == 0)
             {
-
-            }
-            else
-            {
-                foreach (var a in accounts)
-                {
-                    string accstr = a.Numbera + "," + a.Balance;
-                    AllAccounts.Add(accstr);
-
-                }
-            }
-
-            return AllAccounts;
-        }
-
-        public static void Remove(string Accnumb)
-        {
-
-            try
-            {
-               foreach (var x in accounts)
-                {
-                    if (x.Numbera == Accnumb)
-                    {
-                        accounts.Remove(x);  //That specific message — "Collection was modified; enumeration operation may not execute" — always means the same thing: somewhere, a foreach loop is actively going through a list, and while it's still looping, some other code adds or removes an item from that exact same list. foreach doesn't tolerate that; it throws rather than risk skipping/reprocessing items.
-                    }
-                }                                    // now since it exists, we can remove that index from the list.
-                                                                                              // Console.WriteLine("The following account was removed: " + acc1);              // -1 at index because 3rd acount points to 2nd index.
-            }
-            catch (ArgumentOutOfRangeException x)   //changed to ArgumentOutOfRangeException from IndexOutOfRangeException as it will not catch the one sent, which was actullay the Argument one. i was calling the wroing one.
-            {
-                MessageBox.Show(x.Message);
-            }
-            finally
-            {
-                ExitWithSave();
-
+                MessageBox.Show("No Account with this Acc-Number"); 
+                return;
             }
 
-
+            using var deleteAccountQuery = new SqlCommand("DELETE FROM tblAccounts WHERE AccNum = @accNum;", connection);          //Deletion is happening here
+            deleteAccountQuery.Parameters.AddWithValue(@"accNum", accnumb);
+            deleteAccountQuery.ExecuteNonQuery();
 
         }
 
-        public static void ExitWithSave()
-        {
-            List<String> Accounts_To_File = new List<String>();
-            foreach (var x in accounts)                               // var tells the compiler: "figure out the type yourself, based on what's on the right side.",
-                                                                      // and since we have decalred var, the compiler knows what that means
-            {
-                String AccNumero = x.GetNumber();
-                int AccBalance = x.GetBalance();
-                String Balance_For_File = Convert.ToString(AccBalance);
-                String To_Add = AccNumero + ',' + Balance_For_File;
-                Accounts_To_File.Add(To_Add);
+        
 
+        public static List<Account> LoadAccountsIntoList(string search = "")  //search for filtering         //implemented this funciton still as the program still relies on list to run, eg displaying data to the grid.
+        {
+            var accounts = new List<Account>();
+
+            using var connection = new SqlConnection(DbHelper.connectionString);
+            connection.Open();
+            
+            if (search == "")
+            {
+                querySearch = "SELECT AccNum, AccTitle, Cnic, Balance  FROM tblAccounts;";   //the normal string 
+               
+                                                             
+            }
+            else if (search != "")
+            {
+                querySearch = "SELECT AccNum, AccTitle, Cnic, Balance  FROM tblAccounts WHERE AccNum LIKE @search;";  // the one that can be used for filtering
+
+                
             }
 
-            File.WriteAllLines(Acc_File_Path, Accounts_To_File);
+            using var select = new SqlCommand(querySearch, connection);
+            if (search != "")
+            {
+                select.Parameters.AddWithValue("@search", "%" + search + "%");   // this worked becuase we are assigning a value to an thing made outside this scope, if it was not outside and inside, then asgining parameters outside aws not possible
+            }
 
+            using var reader = select.ExecuteReader();
 
-        }
-
-        public static void LoadAccounts()
-        {
-            if (File.Exists(Acc_File_Path))         // This is only checking, no handle is opened in the disk so no close needed, and method that return a filestream uses a lock, and we must close it
-            {                                                                               // all other functions specifically say that they close the file after each call
-                                                                                            // Console.WriteLine("File already Exists");
-                String[] Lines = File.ReadAllLines(Acc_File_Path);
-                // Console.WriteLine("The size of the Lines is = " + Lines.Count());
-                foreach (string line in Lines)
+            while (reader.Read())                                                                           /*The condition being evaluated in while (reader.Read()) is the return value of reader.Read() itself — Read() is a method that returns a bool.
+                                                                                                              Every time you call reader.Read():
+                                                                                                              -It moves the reader's internal cursor forward to the next row in the result set
+                                                                                                              -It returns true if there was a next row to move to
+                                                                                                              -It returns false if there were no more rows left */
                 {
-                    String[] Line_in_parts = line.Split(',');                         // each line read is in a array, and spliting them also makes an array in parts
-                    string Numero = Line_in_parts[0];                                 // Now the rest of the program will use the data in the array, that was populated through files
-                    int balance = Convert.ToInt32(Line_in_parts[1]);
-                    accounts.Add(new Account(Numero, balance));                       // we are data to the array again to use in the program
+                    accounts.Add(new Account(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
                 }
+            return accounts;
 
-            }
-            else
-            {
-                FileStream AccountsFile = File.Create(Acc_File_Path);                  // please remember to close the file here, as the Create gives a open filestream with a lock
-                AccountsFile.Close();                                                  // since there is a lock, no other process can use it, even our own. wihtout close, lock exists 
-                                                                                       // through out the program run time. remember this.
-            }
-        }
 
-        public static List<Account> LoadAccountsIntoList()
-        {
-            try
-            {
-                List<Account> Temp_List = new List<Account>(); 
-                if (File.Exists(Acc_File_Path))         // This is only checking, no handle is opened in the disk so no close needed, and method that return a filestream uses a lock, and we must close it
-                {                                                                               // all other functions specifically say that they close the file after each call
-                                                                                               // Console.WriteLine("File already Exists");
-                    String[] Lines = File.ReadAllLines(Acc_File_Path);
-                    // Console.WriteLine("The size of the Lines is = " + Lines.Count());
-                    foreach (string line in Lines)
-                    {
-                        String[] Line_in_parts = line.Split(',');                         // each line read is in a array, and spliting them also makes an array in parts
-                        string Numero = Line_in_parts[0];                                 // Now the rest of the program will use the data in the array, that was populated through files
-                        int balance = Convert.ToInt32(Line_in_parts[1]);
-                        Temp_List.Add(new Account(Numero, balance));                       // we are data to the array again to use in the program
-                    }
-                    return Temp_List;
-
-                }
-                else
-                {
-                    return new List<Account>();
-                }
-            }
-            catch (Exception ax)
-            {
-                MessageBox.Show(ax.Message);
-                return new List<Account>();
-            }
-
-           
         }
     }
 }

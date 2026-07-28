@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,8 +20,6 @@ namespace WinFormsBankingApp
 
         private void MenuButton_Click(object sender, EventArgs e)
         {
-
-            Banking.ExitWithSave();
             this.Close();
         }
 
@@ -28,19 +27,39 @@ namespace WinFormsBankingApp
         {
             try
             {
-                if (textBox1.Text == "")
+                if (comboBoxAddMoney.SelectedItem == null)
                 {
-                    MessageBox.Show("Missing Account Number\nRETRY");
+                    MessageBox.Show("Please select an account");
                     return;
                 }
+
+                string accNum = comboBoxAddMoney.SelectedItem.ToString();
+
                 if (textBox2.Text == "")
                 {
                     MessageBox.Show("Missing Amount\nRETRY");
                     return;
 
                 }
-                String Accnumero = textBox1.Text;
+
+                if (textBoxTakeAccountTitleDeposit.Text == "")
+                {
+                    MessageBox.Show("Missing Account Title\nRETRY");
+                    return;
+
+                }
+
+                if (textBoxTakeCnicDeposit.Text == "")
+                {
+                    MessageBox.Show("Missing Cnic Number\nRETRY");
+                    return;
+
+                }
+
+                String accNumber = accNum;
                 string deposit = textBox2.Text;
+                string accTitle = textBoxTakeAccountTitleDeposit.Text;
+                string accCnic = textBoxTakeCnicDeposit.Text;
                 int depositFR = Convert.ToInt32(textBox2.Text);
 
 
@@ -50,23 +69,44 @@ namespace WinFormsBankingApp
                     return;
                 }
 
-                Banking.Deposit(Accnumero, depositFR);
+                Banking.Deposit(accNumber, accTitle, accCnic, depositFR);
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
+
+
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Deposit_Load(object sender, EventArgs e)
+        {
+            LoadIntoDropBox();
+        }
+
+        private void LoadIntoDropBox()
+        {
+            comboBoxAddMoney.Items.Clear();
+
+            using var connection = new SqlConnection(DbHelper.connectionString);
+            connection.Open();
+
+            using var command = new SqlCommand(
+                "SELECT AccNum FROM tblAccounts;",        // this sql command gives us the list, but sorted
+                connection);
+            using var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                comboBoxAddMoney.Items.Add(reader.GetString(0));
+
+            }
         }
     }
 }

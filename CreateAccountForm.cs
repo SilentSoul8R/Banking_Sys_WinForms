@@ -22,35 +22,6 @@ namespace WinFormsBankingApp
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnaccnumyes_Click(object sender, EventArgs e)
-        {
-            string ans_acc_num = textBoxGetACCNUM.Text;
-            MessageBox.Show("The Acc num is: " + ans_acc_num);
-            if (ans_acc_num == "")
-            {
-                MessageBox.Show("No Acc Num Given");
-                ans_acc_num = "";
-                return;
-            }
-        }
-
-        private void btn_createcc_balance_Click(object sender, EventArgs e)
-        {
-            string ans_acc_bal = textBoxCreateACCBalance.Text;
-            MessageBox.Show("Balance Given is: " + ans_acc_bal);
-            if (ans_acc_bal == "")
-            {
-                MessageBox.Show("No Balance Given");
-                ans_acc_bal = "";
-                return;
-            }
-        }
-
         private void textBoxCreateACCBalance_TextChanged(object sender, EventArgs e)
         {
 
@@ -61,9 +32,30 @@ namespace WinFormsBankingApp
            
             try
             {
-                int temp_balance_create_acc = Convert.ToInt32(textBoxCreateACCBalance.Text);                    // kept insdie the try-catch block as non numeric will give error when converting.
-                Banking.Create(textBoxGetACCNUM.Text, temp_balance_create_acc);                                 // default is private, in C#, so add public in front of functions we are gonna use in another file.
-                Banking.ExitWithSave();
+                if (textBoxCreateACCBalance.Text == "")
+                {
+                    MessageBox.Show("Balance missing:\nDefaulting to 0");
+                    textBoxCreateACCBalance.Text = "0";
+                }
+
+                if (textBoxTakeAccountTitle.Text == "")
+                {
+                    MessageBox.Show("Account Title missing");
+                    return;
+                }
+
+                if(textBoxTakeCnicCreate.Text == "")
+                {
+                    MessageBox.Show("CNIC is missing");
+                    return;
+                }
+
+
+                int tempBalanceCreateAcc = Convert.ToInt32(textBoxCreateACCBalance.Text);                    // kept insdie the try-catch block as non numeric will give error when converting.
+                
+
+                Banking.Create(textBoxGetACCNUM.Text, textBoxTakeAccountTitle.Text, textBoxTakeCnicCreate.Text, tempBalanceCreateAcc);                                 // default is private, in C#, so add public in front of functions we are gonna use in another file.
+
             }
             catch (Exception ex)
             {
@@ -73,7 +65,6 @@ namespace WinFormsBankingApp
 
         private void btnBack_CreateAcc_Click(object sender, EventArgs e)
         {
-            Banking.ExitWithSave();
        
             this.Close();
 

@@ -31,10 +31,16 @@
             label_Display_All = new Label();
             btn_Menu_DisplayAll = new Button();
             dataGridView1 = new DataGridView();
+            AccountNumber = new DataGridViewTextBoxColumn();
+            AccountTitle = new DataGridViewTextBoxColumn();
+            Cnic = new DataGridViewTextBoxColumn();
+            Balance = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewButtonColumn();
             Column2 = new DataGridViewButtonColumn();
-            listBox_DisplayALL = new ListBox();
             BtnAddRecord = new Button();
+            textBoxSearch = new TextBox();
+            btnSearch = new Button();
+            Filters = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -60,14 +66,42 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2 });
-            dataGridView1.Location = new Point(55, 96);
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { AccountNumber, AccountTitle, Cnic, Balance, Column1, Column2 });
+            dataGridView1.Location = new Point(55, 158);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(694, 319);
+            dataGridView1.Size = new Size(702, 306);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
+            // 
+            // AccountNumber
+            // 
+            AccountNumber.DataPropertyName = "accountNumber";
+            AccountNumber.HeaderText = "Account Number";
+            AccountNumber.Name = "AccountNumber";
+            AccountNumber.Width = 140;
+            // 
+            // AccountTitle
+            // 
+            AccountTitle.DataPropertyName = "accountTitle";
+            AccountTitle.HeaderText = "Account Title";
+            AccountTitle.Name = "AccountTitle";
+            AccountTitle.Width = 140;
+            // 
+            // Cnic
+            // 
+            Cnic.DataPropertyName = "cnic";
+            Cnic.HeaderText = "Cnic";
+            Cnic.Name = "Cnic";
+            Cnic.Width = 140;
+            // 
+            // Balance
+            // 
+            Balance.DataPropertyName = "balance";
+            Balance.HeaderText = "Balance";
+            Balance.Name = "Balance";
+            Balance.Width = 140;
             // 
             // Column1
             // 
@@ -75,7 +109,6 @@
             Column1.Name = "Column1";
             Column1.Text = "Edit";
             Column1.UseColumnTextForButtonValue = true;
-            Column1.Width = 150;
             // 
             // Column2
             // 
@@ -83,22 +116,10 @@
             Column2.Name = "Column2";
             Column2.Text = "Delete";
             Column2.UseColumnTextForButtonValue = true;
-            Column2.Width = 150;
-            // 
-            // listBox_DisplayALL
-            // 
-            listBox_DisplayALL.FormattingEnabled = true;
-            listBox_DisplayALL.ItemHeight = 15;
-            listBox_DisplayALL.Location = new Point(0, 446);
-            listBox_DisplayALL.Name = "listBox_DisplayALL";
-            listBox_DisplayALL.Size = new Size(10, 4);
-            listBox_DisplayALL.TabIndex = 2;
-            listBox_DisplayALL.Click += listBox_DisplayALL_SelectedIndexChanged;
-            listBox_DisplayALL.SelectedIndexChanged += listBox_DisplayALL_SelectedIndexChanged;
             // 
             // BtnAddRecord
             // 
-            BtnAddRecord.Location = new Point(692, 48);
+            BtnAddRecord.Location = new Point(682, 48);
             BtnAddRecord.Name = "BtnAddRecord";
             BtnAddRecord.Size = new Size(85, 30);
             BtnAddRecord.TabIndex = 4;
@@ -106,17 +127,48 @@
             BtnAddRecord.UseVisualStyleBackColor = true;
             BtnAddRecord.Click += BtnAddRecord_Click;
             // 
+            // textBoxSearch
+            // 
+            textBoxSearch.Location = new Point(55, 101);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(609, 23);
+            textBoxSearch.TabIndex = 5;
+            textBoxSearch.KeyDown += textBoxSearch_KeyDown;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(682, 100);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(75, 23);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            btnSearch.KeyDown += btnSearch_KeyDown;
+            // 
+            // Filters
+            // 
+            Filters.Location = new Point(682, 129);
+            Filters.Name = "Filters";
+            Filters.Size = new Size(75, 23);
+            Filters.TabIndex = 7;
+            Filters.Text = "Filters";
+            Filters.UseVisualStyleBackColor = true;
+            Filters.Click += Filters_Click;
+            // 
             // DisplayForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Background__1_;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 489);
+            Controls.Add(Filters);
+            Controls.Add(btnSearch);
+            Controls.Add(textBoxSearch);
             Controls.Add(BtnAddRecord);
             Controls.Add(dataGridView1);
             Controls.Add(btn_Menu_DisplayAll);
             Controls.Add(label_Display_All);
-            Controls.Add(listBox_DisplayALL);
             Name = "DisplayForm";
             Text = "DisplayForm";
             Load += DisplayForm_Load;
@@ -130,9 +182,15 @@
         private Label label_Display_All;
         private Button btn_Menu_DisplayAll;
         private DataGridView dataGridView1;
-        private ListBox listBox_DisplayALL;
         private Button BtnAddRecord;
+        private TextBox textBoxSearch;
+        private Button btnSearch;
+        private DataGridViewTextBoxColumn AccountNumber;
+        private DataGridViewTextBoxColumn AccountTitle;
+        private DataGridViewTextBoxColumn Cnic;
+        private DataGridViewTextBoxColumn Balance;
         private DataGridViewButtonColumn Column1;
         private DataGridViewButtonColumn Column2;
+        private Button Filters;
     }
 }
