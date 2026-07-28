@@ -41,6 +41,10 @@
             textBoxSearch = new TextBox();
             btnSearch = new Button();
             Filters = new Button();
+            textBoxAccNum = new TextBox();
+            textBoxAccTitle = new TextBox();
+            textBoxAccCnic = new TextBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -131,7 +135,7 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(55, 61);
+            textBoxSearch.Location = new Point(102, 79);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.Size = new Size(609, 23);
             textBoxSearch.TabIndex = 5;
@@ -156,12 +160,47 @@
             Filters.UseVisualStyleBackColor = true;
             Filters.Click += Filters_Click;
             // 
+            // textBoxAccNum
+            // 
+            textBoxAccNum.Location = new Point(102, 120);
+            textBoxAccNum.Name = "textBoxAccNum";
+            textBoxAccNum.Size = new Size(192, 23);
+            textBoxAccNum.TabIndex = 8;
+            // 
+            // textBoxAccTitle
+            // 
+            textBoxAccTitle.Location = new Point(300, 120);
+            textBoxAccTitle.Name = "textBoxAccTitle";
+            textBoxAccTitle.Size = new Size(192, 23);
+            textBoxAccTitle.TabIndex = 9;
+            // 
+            // textBoxAccCnic
+            // 
+            textBoxAccCnic.Location = new Point(498, 119);
+            textBoxAccCnic.Name = "textBoxAccCnic";
+            textBoxAccCnic.Size = new Size(192, 23);
+            textBoxAccCnic.TabIndex = 10;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(20, 123);
+            label1.Name = "label1";
+            label1.Size = new Size(76, 20);
+            label1.TabIndex = 11;
+            label1.Text = "Search By:";
+            // 
             // DisplayForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
+            Controls.Add(label1);
+            Controls.Add(textBoxAccCnic);
+            Controls.Add(textBoxAccTitle);
+            Controls.Add(textBoxAccNum);
             Controls.Add(Filters);
             Controls.Add(btnSearch);
             Controls.Add(textBoxSearch);
@@ -192,5 +231,9 @@
         private DataGridViewTextBoxColumn Balance;
         private DataGridViewButtonColumn Column1;
         private DataGridViewButtonColumn Column2;
+        private TextBox textBoxAccNum;
+        private TextBox textBoxAccTitle;
+        private TextBox textBoxAccCnic;
+        private Label label1;
     }
 }

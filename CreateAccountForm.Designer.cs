@@ -63,7 +63,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(158, 304);
+            label2.Location = new Point(711, 332);
             label2.Name = "label2";
             label2.Size = new Size(148, 20);
             label2.TabIndex = 2;
@@ -80,7 +80,7 @@
             // btnCreateAccYes
             // 
             btnCreateAccYes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCreateAccYes.Location = new Point(298, 378);
+            btnCreateAccYes.Location = new Point(560, 498);
             btnCreateAccYes.Name = "btnCreateAccYes";
             btnCreateAccYes.Size = new Size(168, 60);
             btnCreateAccYes.TabIndex = 4;
@@ -101,7 +101,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(158, 108);
+            label3.Location = new Point(96, 206);
             label3.Name = "label3";
             label3.Size = new Size(299, 15);
             label3.TabIndex = 8;
@@ -145,7 +145,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Background__1_;
+            BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
             Controls.Add(textBoxTakeCnicCreate);
             Controls.Add(label5);

@@ -44,7 +44,7 @@
             // btnCreateAccYes
             // 
             btnCreateAccYes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCreateAccYes.Location = new Point(308, 380);
+            btnCreateAccYes.Location = new Point(560, 498);
             btnCreateAccYes.Name = "btnCreateAccYes";
             btnCreateAccYes.Size = new Size(168, 60);
             btnCreateAccYes.TabIndex = 11;
@@ -54,7 +54,7 @@
             // 
             // MenuButton
             // 
-            MenuButton.Location = new Point(14, 15);
+            MenuButton.Location = new Point(12, 12);
             MenuButton.Name = "MenuButton";
             MenuButton.Size = new Size(75, 23);
             MenuButton.TabIndex = 6;
@@ -65,7 +65,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(162, 114);
+            label1.Location = new Point(96, 206);
             label1.Name = "label1";
             label1.Size = new Size(202, 15);
             label1.TabIndex = 23;
@@ -100,7 +100,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(162, 304);
+            label2.Location = new Point(711, 332);
             label2.Name = "label2";
             label2.Size = new Size(306, 20);
             label2.TabIndex = 19;
@@ -144,7 +144,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Background__1_;
+            BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
             Controls.Add(textBoxTakeCnicWithdraw);
             Controls.Add(label5);

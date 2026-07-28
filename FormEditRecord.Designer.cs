@@ -53,7 +53,7 @@
             // btnCreateAccYesEdit
             // 
             btnCreateAccYesEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCreateAccYesEdit.Location = new Point(296, 366);
+            btnCreateAccYesEdit.Location = new Point(560, 498);
             btnCreateAccYesEdit.Name = "btnCreateAccYesEdit";
             btnCreateAccYesEdit.Size = new Size(168, 60);
             btnCreateAccYesEdit.TabIndex = 20;
@@ -73,7 +73,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Schoolbook", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(159, 283);
+            label2.Location = new Point(711, 332);
             label2.Name = "label2";
             label2.Size = new Size(148, 20);
             label2.TabIndex = 18;
@@ -134,7 +134,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Background__1_;
+            BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
             Controls.Add(textBoxTakeCnicEdit);
             Controls.Add(label5);
