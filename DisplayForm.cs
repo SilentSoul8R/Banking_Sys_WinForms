@@ -16,9 +16,7 @@ namespace WinFormsBankingApp
     public partial class DisplayForm : Form
     {
 
-        public string accNum = "";
-        public string accTitle = "";
-        public string accCnic = "";
+        
 
         public string queryFirstHalf = "Select * From tblAccounts";
         public string querySecondHalf = "";
@@ -217,6 +215,8 @@ namespace WinFormsBankingApp
 
             var conditions = new List<string>();          // starts fresh every call so we can make the string again and again
  
+
+
             if (accNum != "")                             // these will make it so that we dont have to individualy make em, we can just pick those we have gotten, and just add these. with add comes separators
             {
                 conditions.Add("AccNum LIKE @accnum");    // we can add all these to a list, then add them in the end, by AND as separator
@@ -232,8 +232,9 @@ namespace WinFormsBankingApp
                 conditions.Add("Cnic LIKE @acccnic");
             }
 
-            string queryFirstHalf = "SELECT * FROM tblAccounts";  // better to handle ";" inside the string builder
-            string queryFinal; 
+            // better to handle ";" inside the string builder
+            
+
 
             if (conditions.Count == 0)              // if no conditions, a vanila search
             {
@@ -244,6 +245,8 @@ namespace WinFormsBankingApp
                 queryFinal = queryFirstHalf + " WHERE " + string.Join(" AND ", conditions) + ";";
             }
 
+
+
             var accounts = new List<Account>();
 
             using var connection = new SqlConnection(DbHelper.connectionString);     // normal setting a connection
@@ -251,7 +254,9 @@ namespace WinFormsBankingApp
 
             using var command = new SqlCommand(queryFinal, connection);  // command is the search query here
 
-            if (accNum != "")  // 
+
+
+            if (accNum != "")  // this assures we only bother to do stuff like adding % on the sides of the string, only when they exist.
                 command.Parameters.AddWithValue("@accnum", "%" + accNum + "%");
 
             if (accTitle != "")
@@ -259,6 +264,8 @@ namespace WinFormsBankingApp
 
             if (accCnic != "")
                 command.Parameters.AddWithValue("@acccnic", "%" + accCnic + "%");
+
+
 
             using var reader = command.ExecuteReader();
             while (reader.Read())
