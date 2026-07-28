@@ -123,6 +123,8 @@ namespace WinFormsBankingApp
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+
+
             RefreshGrid(textBoxSearch.Text);                   // i created this method, because originally i was calling two lines, with the same parameters. that was useless, i didnt need the first line, a method made it easier to change
         }
 

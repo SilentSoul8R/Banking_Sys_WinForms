@@ -48,7 +48,7 @@
             // 
             label_Display_All.AutoSize = true;
             label_Display_All.Font = new Font("Century Schoolbook", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_Display_All.Location = new Point(163, 45);
+            label_Display_All.Location = new Point(328, 9);
             label_Display_All.Name = "label_Display_All";
             label_Display_All.Size = new Size(501, 28);
             label_Display_All.TabIndex = 0;
@@ -71,7 +71,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { AccountNumber, AccountTitle, Cnic, Balance, Column1, Column2 });
             dataGridView1.Location = new Point(55, 158);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(694, 306);
+            dataGridView1.Size = new Size(1193, 377);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -80,28 +80,28 @@
             AccountNumber.DataPropertyName = "accountNumber";
             AccountNumber.HeaderText = "Account Number";
             AccountNumber.Name = "AccountNumber";
-            AccountNumber.Width = 140;
+            AccountNumber.Width = 200;
             // 
             // AccountTitle
             // 
             AccountTitle.DataPropertyName = "accountTitle";
             AccountTitle.HeaderText = "Account Title";
             AccountTitle.Name = "AccountTitle";
-            AccountTitle.Width = 140;
+            AccountTitle.Width = 200;
             // 
             // Cnic
             // 
             Cnic.DataPropertyName = "cnic";
             Cnic.HeaderText = "Cnic";
             Cnic.Name = "Cnic";
-            Cnic.Width = 140;
+            Cnic.Width = 200;
             // 
             // Balance
             // 
             Balance.DataPropertyName = "balance";
             Balance.HeaderText = "Balance";
             Balance.Name = "Balance";
-            Balance.Width = 140;
+            Balance.Width = 200;
             // 
             // Column1
             // 
@@ -109,6 +109,7 @@
             Column1.Name = "Column1";
             Column1.Text = "Edit";
             Column1.UseColumnTextForButtonValue = true;
+            Column1.Width = 175;
             // 
             // Column2
             // 
@@ -116,10 +117,11 @@
             Column2.Name = "Column2";
             Column2.Text = "Delete";
             Column2.UseColumnTextForButtonValue = true;
+            Column2.Width = 175;
             // 
             // BtnAddRecord
             // 
-            BtnAddRecord.Location = new Point(692, 48);
+            BtnAddRecord.Location = new Point(1163, 54);
             BtnAddRecord.Name = "BtnAddRecord";
             BtnAddRecord.Size = new Size(85, 30);
             BtnAddRecord.TabIndex = 4;
@@ -129,14 +131,14 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(67, 100);
+            textBoxSearch.Location = new Point(55, 61);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.Size = new Size(609, 23);
             textBoxSearch.TabIndex = 5;
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(682, 100);
+            btnSearch.Location = new Point(1173, 90);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(75, 23);
             btnSearch.TabIndex = 6;
@@ -146,7 +148,7 @@
             // 
             // Filters
             // 
-            Filters.Location = new Point(682, 129);
+            Filters.Location = new Point(1173, 119);
             Filters.Name = "Filters";
             Filters.Size = new Size(75, 23);
             Filters.TabIndex = 7;
@@ -158,8 +160,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.Background__1_;
-            ClientSize = new Size(800, 489);
+            BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
+            ClientSize = new Size(1298, 582);
             Controls.Add(Filters);
             Controls.Add(btnSearch);
             Controls.Add(textBoxSearch);
@@ -183,12 +185,12 @@
         private Button BtnAddRecord;
         private TextBox textBoxSearch;
         private Button btnSearch;
+        private Button Filters;
         private DataGridViewTextBoxColumn AccountNumber;
         private DataGridViewTextBoxColumn AccountTitle;
         private DataGridViewTextBoxColumn Cnic;
         private DataGridViewTextBoxColumn Balance;
         private DataGridViewButtonColumn Column1;
         private DataGridViewButtonColumn Column2;
-        private Button Filters;
     }
 }

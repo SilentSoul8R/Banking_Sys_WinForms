@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic;
+using System.Windows.Forms.DataVisualization.Charting;
 
 
 namespace WinFormsBankingApp
@@ -23,6 +24,20 @@ namespace WinFormsBankingApp
 
             string convertedamount = total.ToString("C0");
             label3Form1Balance.Text = @"Total Money in the Bank: " + convertedamount;
+
+         //   Chart moneyChart = new Chart();
+         //   moneyChart.Dock = DockStyle.Fill;
+//
+         //    ChartArea chartArea = new ChartArea("MainArea");
+         //   moneyChart.ChartAreas.Add(chartArea);
+//
+         //   Series series = new Series("MoneySeries")
+         //   {
+         //       ChartType = SeriesChartType.Pie
+         //   };
+         //   moneyChart.Series.Add(series);
+         //
+         //   this.Controls.Add(moneyChart);
         }
 
         private void Form1_Load(object sender, EventArgs e)

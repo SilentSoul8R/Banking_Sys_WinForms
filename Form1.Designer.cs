@@ -50,18 +50,18 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(284, 57);
+            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(480, 24);
             label1.Name = "label1";
-            label1.Size = new Size(257, 32);
+            label1.Size = new Size(345, 45);
             label1.TabIndex = 0;
             label1.Text = "Welcome to Our BANK";
             // 
             // btnCreateAccount
             // 
-            btnCreateAccount.Location = new Point(330, 132);
+            btnCreateAccount.Location = new Point(578, 128);
             btnCreateAccount.Name = "btnCreateAccount";
-            btnCreateAccount.Size = new Size(150, 50);
+            btnCreateAccount.Size = new Size(162, 70);
             btnCreateAccount.TabIndex = 1;
             btnCreateAccount.Text = "Create Account";
             btnCreateAccount.UseVisualStyleBackColor = true;
@@ -69,9 +69,9 @@
             // 
             // button3
             // 
-            button3.Location = new Point(330, 188);
+            button3.Location = new Point(578, 218);
             button3.Name = "button3";
-            button3.Size = new Size(150, 50);
+            button3.Size = new Size(162, 70);
             button3.TabIndex = 3;
             button3.Text = "View All Accounts";
             button3.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(330, 244);
+            button4.Location = new Point(578, 306);
             button4.Name = "button4";
-            button4.Size = new Size(150, 50);
+            button4.Size = new Size(162, 70);
             button4.TabIndex = 4;
             button4.Text = "Add Money";
             button4.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@
             // 
             // button5
             // 
-            button5.Location = new Point(330, 300);
+            button5.Location = new Point(578, 394);
             button5.Name = "button5";
-            button5.Size = new Size(150, 50);
+            button5.Size = new Size(162, 70);
             button5.TabIndex = 5;
             button5.Text = "Withdraw Money";
             button5.UseVisualStyleBackColor = true;
@@ -99,9 +99,9 @@
             // 
             // button7
             // 
-            button7.Location = new Point(330, 356);
+            button7.Location = new Point(578, 484);
             button7.Name = "button7";
-            button7.Size = new Size(150, 50);
+            button7.Size = new Size(162, 70);
             button7.TabIndex = 7;
             button7.Text = "Exit";
             button7.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@
             // 
             label3Form1.AutoSize = true;
             label3Form1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3Form1.Location = new Point(575, 57);
+            label3Form1.Location = new Point(943, 220);
             label3Form1.Name = "label3Form1";
             label3Form1.Size = new Size(0, 20);
             label3Form1.TabIndex = 9;
@@ -120,7 +120,7 @@
             // 
             label3Form1Balance.AutoSize = true;
             label3Form1Balance.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3Form1Balance.Location = new Point(575, 94);
+            label3Form1Balance.Location = new Point(943, 154);
             label3Form1Balance.Name = "label3Form1Balance";
             label3Form1Balance.Size = new Size(0, 17);
             label3Form1Balance.TabIndex = 10;
@@ -130,7 +130,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { accountsToolStripMenuItem, transactionsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(1298, 24);
             menuStrip1.TabIndex = 11;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -182,8 +182,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            BackgroundImage = Properties.Resources.Background__1_;
-            ClientSize = new Size(800, 450);
+            BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
+            ClientSize = new Size(1298, 592);
             Controls.Add(label3Form1Balance);
             Controls.Add(label3Form1);
             Controls.Add(button7);
