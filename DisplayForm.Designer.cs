@@ -47,6 +47,10 @@
             textBoxToValue = new TextBox();
             label2 = new Label();
             label3 = new Label();
+            btnPrevDisplayForm = new Button();
+            btnNextDisplayForm = new Button();
+            btnLastDisplayForm = new Button();
+            lblStatusLabelDisplayGrid = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -77,7 +81,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { AccountNumber, AccountTitle, Cnic, Balance, Column1, Column2 });
             dataGridView1.Location = new Point(55, 158);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1193, 377);
+            dataGridView1.Size = new Size(1193, 365);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -148,7 +152,7 @@
             // 
             // textBoxAccNum
             // 
-            textBoxAccNum.Location = new Point(102, 120);
+            textBoxAccNum.Location = new Point(102, 100);
             textBoxAccNum.Name = "textBoxAccNum";
             textBoxAccNum.Size = new Size(192, 23);
             textBoxAccNum.TabIndex = 8;
@@ -156,7 +160,7 @@
             // 
             // textBoxAccTitle
             // 
-            textBoxAccTitle.Location = new Point(300, 120);
+            textBoxAccTitle.Location = new Point(300, 100);
             textBoxAccTitle.Name = "textBoxAccTitle";
             textBoxAccTitle.Size = new Size(192, 23);
             textBoxAccTitle.TabIndex = 9;
@@ -164,7 +168,7 @@
             // 
             // textBoxAccCnic
             // 
-            textBoxAccCnic.Location = new Point(498, 119);
+            textBoxAccCnic.Location = new Point(498, 100);
             textBoxAccCnic.Name = "textBoxAccCnic";
             textBoxAccCnic.Size = new Size(192, 23);
             textBoxAccCnic.TabIndex = 10;
@@ -174,7 +178,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(20, 123);
+            label1.Location = new Point(20, 103);
             label1.Name = "label1";
             label1.Size = new Size(76, 20);
             label1.TabIndex = 11;
@@ -214,12 +218,55 @@
             label3.TabIndex = 15;
             label3.Text = "To: ";
             // 
+            // btnPrevDisplayForm
+            // 
+            btnPrevDisplayForm.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPrevDisplayForm.Location = new Point(1011, 529);
+            btnPrevDisplayForm.Name = "btnPrevDisplayForm";
+            btnPrevDisplayForm.Size = new Size(69, 41);
+            btnPrevDisplayForm.TabIndex = 16;
+            btnPrevDisplayForm.Text = "PREV";
+            btnPrevDisplayForm.UseVisualStyleBackColor = true;
+            // 
+            // btnNextDisplayForm
+            // 
+            btnNextDisplayForm.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnNextDisplayForm.Location = new Point(1095, 529);
+            btnNextDisplayForm.Name = "btnNextDisplayForm";
+            btnNextDisplayForm.Size = new Size(69, 41);
+            btnNextDisplayForm.TabIndex = 17;
+            btnNextDisplayForm.Text = "NEXT";
+            btnNextDisplayForm.UseVisualStyleBackColor = true;
+            // 
+            // btnLastDisplayForm
+            // 
+            btnLastDisplayForm.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLastDisplayForm.Location = new Point(1179, 529);
+            btnLastDisplayForm.Name = "btnLastDisplayForm";
+            btnLastDisplayForm.Size = new Size(69, 41);
+            btnLastDisplayForm.TabIndex = 18;
+            btnLastDisplayForm.Text = "LAST";
+            btnLastDisplayForm.UseVisualStyleBackColor = true;
+            // 
+            // lblStatusLabelDisplayGrid
+            // 
+            lblStatusLabelDisplayGrid.AutoSize = true;
+            lblStatusLabelDisplayGrid.Location = new Point(55, 140);
+            lblStatusLabelDisplayGrid.Name = "lblStatusLabelDisplayGrid";
+            lblStatusLabelDisplayGrid.Size = new Size(162, 15);
+            lblStatusLabelDisplayGrid.TabIndex = 19;
+            lblStatusLabelDisplayGrid.Text = "Showing: 0 to 100 out of 1000";
+            // 
             // DisplayForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
+            Controls.Add(lblStatusLabelDisplayGrid);
+            Controls.Add(btnLastDisplayForm);
+            Controls.Add(btnNextDisplayForm);
+            Controls.Add(btnPrevDisplayForm);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(textBoxToValue);
@@ -262,5 +309,9 @@
         private TextBox textBoxToValue;
         private Label label2;
         private Label label3;
+        private Button btnPrevDisplayForm;
+        private Button btnNextDisplayForm;
+        private Button btnLastDisplayForm;
+        private Label lblStatusLabelDisplayGrid;
     }
 }
