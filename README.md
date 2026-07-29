@@ -1,19 +1,17 @@
-# 🏦 Banking Management System — WinForms
+# 🏦 Banking Management System  (WinForms + SQL Server)
 
-> A desktop banking application built with **C# and Windows Forms (.NET)**, providing a simple graphical interface to create, deposit, withdraw, edit, remove, and display bank accounts, all backed by flat-file persistence.
+> A desktop banking application built with **C# WinForms**, backed by **Microsoft SQL Server** (via `Microsoft.Data.SqlClient`), supporting account creation, deposits, withdrawals, editing, deletion, and multi-field filtered search.
 
 ---
-<div align="center">
 
-<img width="1297" height="621" alt="image" src="https://github.com/user-attachments/assets/2fe35255-f5a2-45a4-abd7-f72285467699" />
-
+<div>
+        <img width="1296" height="622" alt="image" src="https://github.com/user-attachments/assets/e9736ddd-356f-44b5-bf13-a26dbaadebf6" />
 
 </div>
----
 
 ## 📖 Overview
 
-This project simulates the core operations of a retail bank through a lightweight WinForms desktop app. Users interact through a central menu (`Form1`) that launches dedicated forms for each banking operation. Account data is held in memory during runtime and persisted to a local text file (`AccFile.txt`) using comma-separated values.
+This project has evolved from a flat-file (`AccFile.txt`) prototype into a fully SQL Server–backed banking app. Every account now carries an **account number, account title, CNIC, and balance**, and the main account grid (`DisplayForm`) supports **dynamic, multi-field filtering** built entirely from parameterized SQL, no in-memory filtering, no static file I/O.
 
 ---
 
@@ -21,14 +19,15 @@ This project simulates the core operations of a retail bank through a lightweigh
 
 | Feature | Description |
 |---|---|
-| 🆕 **Create Account** | Register a new account with a unique account number and starting balance (rejects negative balances) |
-| 💵 **Deposit** ("Add Money") | Add funds to an existing account, with empty-field and negative-amount validation |
-| 💸 **Withdrawal** ("Withdraw Money") | Remove funds from an account, with empty-field, negative-amount, and insufficient-funds protection |
-| ✏️ **Edit Account** | Update an existing account's number/balance from the grid |
-| 🗑️ **Remove Account** | Delete an account by its account number string (from the main menu or the grid) |
-| 📋 **View All Accounts** | View every active account in a currency-formatted `DataGridView` with inline Edit/Delete buttons |
-| 📊 **Live Dashboard Stats** | Main menu shows a running "X Users trust us" count and the bank's total balance on startup |
-| 💾 **Save & Exit** | Persist all in-memory accounts to disk on exit |
+| 🆕 **Create Account** | Account number (`PKBM<digits>` format), account title, CNIC, and starting balance |
+| 💵 **Deposit** | Adds funds; requires account number (via dropdown), title, and CNIC as an identity check |
+| 💸 **Withdrawal** | Deducts funds with the same identity check, blocked if insufficient funds |
+| ✏️ **Edit Account** | Update balance, title, and CNIC for an account, opened directly from the grid row |
+| 🗑️ **Delete Account** | Remove an account directly from the grid, with a Yes/No confirmation |
+| 🔍 **Multi-Field Filtering** | Filter by Account Number, Account Title, CNIC, and a Balance range (From/To), any combination, dynamically built into one SQL query |
+| ⌨️ **Enter-to-Search** | Pressing Enter in any filter box triggers the same search as clicking "Search" |
+| 📊 **Live Dashboard Stats** | Main menu shows total account count and total bank balance on load |
+| 🗂️ **Menu Bar Navigation** | Full `MenuStrip` (Accounts → Create/View All, Transactions → Deposit/Withdraw) alongside the original buttons |
 
 ---
 
@@ -37,176 +36,156 @@ This project simulates the core operations of a retail bank through a lightweigh
 ```
 WinFormsBankingApp/
 │
-├── Program.cs                     # Application entry point
-├── Form1.cs / .Designer.cs        # Main menu / dashboard (with live stats + app icon)
-├── CreateAccountForm.cs / .Designer.cs  # Standalone account creation form
-├── AddNewAccDisplay.cs / .Designer.cs   # Account creation form (launched from DisplayForm)
-├── Deposit.cs / .Designer.cs      # Deposit funds form ("Add Money")
-├── Withdrawal.cs / .Designer.cs   # Withdraw funds form ("Withdraw Money")
-├── DisplayForm.cs / .Designer.cs  # View all accounts (DataGridView + inline Edit/Delete)
-├── FormEditRecord.cs / .Designer.cs  # Edit an existing account's number/balance
-├── Account.cs                     # Account model/entity
-├── Banking.cs                     # Static business-logic / data-access layer
-└── AccFile.txt                    # Flat-file data store (CSV: AccountNumber,Balance)
+├── Program.cs                        # Application entry point
+├── Form1.cs / .Designer.cs           # Main dashboard (live stats, menu bar, nav buttons)
+├── CreateAccountForm.cs / .Designer.cs   # Create a new account (AccNum, Title, CNIC, Balance)
+├── Deposit.cs / .Designer.cs         # Deposit form (dropdown + title/CNIC identity check)
+├── Withdrawal.cs / .Designer.cs      # Withdrawal form (dropdown + title/CNIC identity check)
+├── DisplayForm.cs / .Designer.cs     # Main grid: view, filter, edit, delete accounts
+├── FormEditRecord.cs / .Designer.cs  # Edit an existing account's balance/title/CNIC
+├── Account.cs                        # Account model (accountNumber, accountTitle, cnic, balance)
+├── Banking.cs                        # Static SQL data-access layer (Create/Deposit/Withdrawal/Remove/Load)
+└── DbHelper.cs                       # SQL Server connection string
 ```
 
 ---
 
 ## 🧩 Architecture
 
-### Class Diagram (conceptual)
-
 ```
 ┌───────────────┐        uses         ┌──────────────────┐
 │    Form1      │────────────────────▶│      Banking      │
-│ (Main Menu,   │                     │  (static logic +   │
-│  live stats)  │                     │  UI messageboxes)  │
+│ (Dashboard)   │                     │ (static SQL logic) │
 └───────┬───────┘                     └─────────┬──────────┘
-        │ opens                                 │ manages
+        │ opens                                 │ reads/writes
         ▼                                        ▼
 ┌────────────────────────────┐          ┌───────────────┐
-│ CreateAccountForm           │          │    Account     │
-│ Deposit                     │          │  (model)       │
-│ Withdrawal                  │          └───────────────┘
-│ DisplayForm ──▶ AddNewAccDisplay        Numbera, Balance
-│      └────────▶ FormEditRecord
-└────────────────────────────┘
+│ CreateAccountForm            │          │  tblAccounts   │
+│ Deposit                      │          │ (SQL Server)   │
+│ Withdrawal                   │          │ AccNum,        │
+│ DisplayForm ──▶ FormEditRecord│         │ AccTitle,      │
+│      (filters + grid)        │          │ Cnic, Balance  │
+└────────────────────────────┘          └───────────────┘
 ```
 
-### 🔑 Key Classes
+### `Account` model
 
-#### `Account`
-A simple data model representing a bank account.
+```csharp
+public string accountNumber { get; set; }
+public string accountTitle { get; set; }
+public string cnic { get; set; }
+public int balance { get; set; }
+```
 
-- `Numbera`, account number (`string`)
-- `Balance`, current balance (`int`)
-- `Convert_To_Str()`, `GetBalance()`, `GetNumber()`, helper accessors
+### `Banking` (static data-access layer)
 
-#### `Banking` (static class)
-The application's data-access and business-logic layer. Holds the in-memory `List<Account> accounts` and now handles both the logic **and** the user-facing success/error `MessageBox` popups for most operations:
-
-- `Create(string, int)`, adds a new account, guards against duplicates **and negative balances**, appends to file, shows a confirmation popup, then saves
-- `Deposit(string, int)`, increases balance for a matched account, shows a confirmation popup, then saves
-- `Withdrawal(string, int)`, decreases balance if funds are sufficient (shows an "insufficient funds" popup instead of throwing if not), shows a confirmation popup on success, then saves
-- `Remove(string)`, deletes an account by matching its account-number string (see ⚠️ note below)
-- `DisplayAll()`, returns account summaries as strings
-- `ExitWithSave()`, writes all accounts back to `AccFile.txt`
-- `LoadAccounts()` / `LoadAccountsIntoList()`, reads accounts from disk on startup
-
-> Note: account **editing** (via `FormEditRecord`) still doesn't go through a dedicated `Banking` method — it mutates `Banking.accounts` directly (`Banking.accounts[Index].Balance = ...`) and then calls `ExitWithSave()`.
-
-#### Forms
-| Form | Purpose |
-|---|---|
-| `Form1` | Main dashboard; on construction, loads accounts and computes/displays a live user count and total bank balance |
-| `CreateAccountForm` | Collects account number + balance, calls `Banking.Create`, then also explicitly calls `Banking.ExitWithSave()` again |
-| `AddNewAccDisplay` | A secondary "add account" dialog launched from `DisplayForm`, ⚠️ currently non-functional, see limitations |
-| `Deposit` | Validates input, then calls `Banking.Deposit` (which now owns the success popup) |
-| `Withdrawal` | Validates input, then calls `Banking.Withdrawal` (which now owns the success/failure popups) |
-| `DisplayForm` | Shows all accounts in a currency-formatted `DataGridView` with **Edit**/**Delete** button columns and an "Add New" button |
-| `FormEditRecord` | Looks up an account by number and overwrites its number/balance, then saves |
+- `Create(accNumber, accTitle, cnic, balance)`: inserts a new row, blocks negative balances and duplicate account numbers
+- `Deposit(numb, title, cnic, bal)`: increases balance, **matched by AccNum + AccTitle + CNIC together**
+- `Withdrawal(numb, title, cnic, amt)`: decreases balance if funds are sufficient, same identity match
+- `Remove(accnumb)`: deletes by account number, with an existence check first
+- `LoadAccountsIntoList(search)`: legacy single-field search (superseded by `DisplayForm.FilteredLoadIntoGrid` for multi-field filtering)
 
 ---
 
-## 💾 Data Persistence
+## 🔎 Filtering — how it works
 
-Accounts are stored as plain CSV lines in a local text file (`AccFile.txt`). Current sample data:
-
-```
-acc1,16976
-acc2,150
-acc3,7050
-acc4,2500
-acc5,140
-acc7,1875
-acc9,1250
-acc11,8650
-acc12,1000
-acc13,2455
-acc14,500
-acc15,750
-acc16,0
-acc18,0
-```
-
-The file path is currently **hardcoded** to a developer machine:
+`DisplayForm.FilteredLoadIntoGrid()` builds a SQL query **dynamically**, adding only the conditions the user actually filled in:
 
 ```csharp
-static String Acc_File_Path = @"************\WinFormsBankingApp\WinFormsBankingApp\AccFile.txt";
+var conditions = new List<string>();
+
+if (rangeFrom != "" && rangeTo != "")
+    conditions.Add("Balance BETWEEN @From AND @To");
+
+if (accNum != "")
+    conditions.Add("AccNum LIKE @accnum");
+
+if (accTitle != "")
+    conditions.Add("AccTitle LIKE @acctitle");
+
+if (accCnic != "")
+    conditions.Add("Cnic LIKE @acccnic");
+
+queryFinal = conditions.Count == 0
+    ? queryFirstHalf + ";"
+    : queryFirstHalf + " WHERE " + string.Join(" AND ", conditions) + ";";
 ```
 
-> ⚠️ **Note:** This path must be updated (ideally to a relative or `Application.StartupPath`-based path) before running on another machine.
+Each condition is paired with a parameter added only when that field was used, so the query never references a parameter that wasn't actually inserted into the SQL text, and vice versa. This is the core "dynamic string, safe parameters" pattern used throughout the app: **column/structure comes from trusted, hardcoded strings; user-typed values always go through `@parameters`, never string concatenation.**
+
+### Filter fields available
+
+| Field | Match type |
+|---|---|
+| Account Number | `LIKE '%value%'` (contains) |
+| Account Title | `LIKE '%value%'` (contains) |
+| CNIC | `LIKE '%value%'` (contains) |
+| Balance | `BETWEEN @From AND @To` (only applied if **both** From and To are filled) |
+
+### Enter-to-search
+
+Every filter textbox (`textBoxAccNum`, `textBoxAccTitle`, `textBoxAccCnic`, `textBoxFromValue`, `textBoxToValue`) has a `KeyDown` handler that checks for `Keys.Enter` and calls `btnSearch_Click` directly, with `e.SuppressKeyPress = true` to prevent the system "ding" sound.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Windows OS
-- [.NET SDK](https://dotnet.microsoft.com/) (Windows Forms support, `net6.0-windows` or later)
-- Visual Studio 2022 (recommended) or `dotnet` CLI
+- Windows OS, .NET SDK (WinForms support)
+- SQL Server instance (local, LocalDB, or named instance)
+- `Microsoft.Data.SqlClient` NuGet package
 
-### Run the App
+### Database setup
 
-```bash
-git clone <your-repo-url>
-cd WinFormsBankingApp
-dotnet build
-dotnet run
+```sql
+CREATE TABLE tblAccounts (
+    AccNum   VARCHAR(50) NOT NULL PRIMARY KEY,
+    AccTitle VARCHAR(50) NULL,
+    Cnic     VARCHAR(50) NULL,
+    Balance  INT NOT NULL
+);
 ```
 
-Or simply open the `.sln` file in Visual Studio and press **F5**.
+### Connection string
 
-### First-Time Setup
-1. Update `Acc_File_Path` in `Banking.cs` to a valid path on your machine.
-2. Ensure the target directory exists (or let `Banking.LoadAccounts()` create the file automatically).
-3. Launch the app, the main menu appears showing live account stats and navigation buttons.
+Set in `DbHelper.cs`:
+
+```csharp
+public static string connectionString =
+    "server=YOUR_SERVER\\INSTANCE;user id=YOUR_USER;password=YOUR_PASSWORD;database=YOUR_DB;TrustServerCertificate=True;";
+```
+
+> ⚠️ Keep real credentials out of source control, see the "Security Notes" section below.
 
 ---
 
-## 🧭 User Flow
+## ⚠️ Known Issues
 
-```
-Form1 (Main Menu — shows live "X Users trust us" + total balance on load)
- ├── Create Account      → CreateAccountForm → Banking.Create() → ExitWithSave() (called twice)
- ├── Remove Account       → InputBox (string acc number, validated non-empty) → Banking.Remove()
- ├── View All Accounts    → DisplayForm → DataGridView (currency-formatted Balance column)
- │                           ├── Add New   → AddNewAccDisplay → ⚠️ shows success label but never creates the account
- │                           ├── "Edit" column button   → FormEditRecord → mutates Banking.accounts → ExitWithSave()
- │                           └── "Delete" column button → InputBox → Banking.Remove()
- ├── Add Money (Deposit)      → Deposit → validate → Banking.Deposit() (popup + save inside Banking)
- ├── Withdraw Money            → Withdrawal → validate → Banking.Withdrawal() (popup + save inside Banking)
- └── Exit and Save        → Banking.ExitWithSave()
-```
+- 🧮 **`Deposit` collects identity fields but its `UPDATE` doesn't consistently verify them**: check current `Banking.Deposit`/`Banking.Withdrawal` to confirm both enforce `AccNum + AccTitle + Cnic` matching, and that a **row-count check** (`ExecuteNonQuery()`'s return value) is used to detect a failed identity match instead of assuming success.
+- 🔢 **Balance range parameters mix types**: `command.Parameters.AddWithValue("@From", rangeFrom)` passes a raw **string** for a column that's `INT`; relies on SQL Server's implicit conversion rather than parsing with `Convert.ToInt32` first. Same for the `@To` default of `100000000` (an `int` literal), mixing string and int values across calls to the same parameter name is inconsistent and worth normalizing.
+- 🖊️ **`FormEditRecord`'s balance parameter** is still passed as a raw string (`balanceStr`) rather than a parsed `int` in some versions, validate and convert before sending to SQL.
+- 🧾 **Empty-field validation in `FormEditRecord`** for Account Title/CNIC shows a warning but may not always `return;` afterward, confirm both checks stop execution, not just display a message.
+- 🔒 **Hardcoded connection string**: currently committed directly in `DbHelper.cs`; move to a git-ignored config file or environment variable before pushing to a public repo.
+- 🪪 **No uniqueness enforcement on CNIC**: the same CNIC could currently be used across multiple account numbers, since only `AccNum` is checked for duplicates on creation.
 
 ---
 
-## ⚠️ Known Limitations
+## 🔐 Security Notes
 
-- 🔒 **Hardcoded file path**: not portable across machines out of the box
-- 🐛 **`AddNewAccDisplay` is currently broken**: `btnCreateAccYesDisplay_Click` sets `lblMessage.Text` to a success message and then hits an unconditional `return`, so the actual `Banking.Create(...)` call (and its validation/try-catch) below is dead code and never runs. Clicking "Add Account" from `DisplayForm` currently creates nothing.
-- 🧟 **Leftover scratch code**: `AddNewAccDisplay.cs` contains an unrelated `Person` class with a `SayHello` method that appears to be test/example code left in the file.
-- 🔁 **`Banking.Remove` mutates a list while iterating it**: the `foreach (var x in accounts) { ... accounts.Remove(x); }` pattern is the exact scenario that throws `InvalidOperationException: Collection was modified` in .NET; it may appear to "work" only because the loop exits right after the match, but it's fragile and not guaranteed safe.
-- 🎭 **Layered responsibilities**: `Banking.Deposit`/`Withdrawal`/`Create` now show their own `MessageBox` popups and call `ExitWithSave()` internally, in addition to forms doing their own validation/popups. This mixes business logic with UI concerns and creates some redundant saves (e.g. `CreateAccountForm` calls `ExitWithSave()` again right after `Banking.Create()` already did).
-- 🖱️ **Grid "Edit"/"Delete" buttons don't target the clicked row**: clicking either button opens an `InputBox`/`FormEditRecord` that asks the user to re-type the account number rather than acting on the row that was clicked.
-- ✏️ **`FormEditRecord` has no pre-fill**: the form doesn't load the selected account's current number/balance into its text boxes, so the user must know and re-type the exact existing account number to edit it.
-- 🧵 **No concurrency/locking** protection for simultaneous file access.
-- 🧮 **Balance validation is inconsistent**: `Create` and the `Deposit`/`Withdrawal` forms all check for negative amounts independently, with no shared validation helper.
+- All user-supplied **values** are passed through `SqlParameter`/`AddWithValue`, never concatenated directly into SQL text. This is correct and should stay consistent across any new query added to the app.
+- **Column names are never taken from user input**, they're always hardcoded strings chosen by the developer (e.g. `"AccNum LIKE @accnum"`), which is what keeps dynamic query-building safe from SQL injection. If a future feature (e.g. "pick which column to search") is added, any column name coming from a dropdown/user choice must be checked against a hardcoded whitelist before being inserted into the query string.
+- Do not commit real database credentials to GitHub. Use `.gitignore` on a config file holding `DbHelper.connectionString`, or migrate to environment variables / `dotnet user-secrets`.
 
 ---
 
 ## 🛠️ Suggested Improvements
 
--  Replace hardcoded path with `Path.Combine(Application.StartupPath, "AccFile.txt")`
--  Fix `AddNewAccDisplay.btnCreateAccYesDisplay_Click`, remove the early `return` (or make it conditional) so account creation actually executes
--  Remove the stray `Person`/`SayHello` scratch class from `AddNewAccDisplay.cs`
--  Rewrite `Banking.Remove` using a reverse `for` loop, `RemoveAll(predicate)`, or `.ToList()` snapshot to avoid mutate-while-iterating
--  Decide on one layer for user feedback (either `Banking` or the forms, not both) to avoid duplicate saves/popups
--  Pass the clicked row's account data into `FormEditRecord`/delete flow instead of re-prompting via `InputBox`
--  Pre-fill `FormEditRecord`'s text boxes with the selected account's current values
--  Extract a shared `IsValidAmount(int)` helper instead of repeating negative-number checks
--  Move to a real data store (SQLite/JSON) instead of raw CSV text
--  Introduce unit tests for `Banking` logic, decoupled from `MessageBox`/UI calls
+- [ ] Add a unique constraint or duplicate-check on `Cnic`, not just `AccNum`
+- [ ] Normalize balance-range parameters to always pass parsed `int` values, never raw strings
+- [ ] Add row-count checks (`ExecuteNonQuery()` return value) after every `UPDATE`/`DELETE` to detect silent no-op matches
+- [ ] Move `DbHelper.connectionString` out of source control
+- [ ] Consolidate `Banking.LoadAccountsIntoList(search)` and `DisplayForm.FilteredLoadIntoGrid()`, the former is now largely superseded by the latter's multi-field filtering
+- [ ] Add client-side CNIC format validation (13 digits, optional dashes) before hitting the database
 
 ---
 
@@ -218,6 +197,6 @@ This project is provided as-is for educational purposes. Add your preferred lice
 
 <div align="center">
 
-**Built with ❤️ using C# WinForms**
+**Built with ❤️ using C# WinForms + SQL Server**
 
 </div>
