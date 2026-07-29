@@ -38,23 +38,25 @@
             Column1 = new DataGridViewButtonColumn();
             Column2 = new DataGridViewButtonColumn();
             BtnAddRecord = new Button();
-            textBoxSearch = new TextBox();
             btnSearch = new Button();
-            Filters = new Button();
             textBoxAccNum = new TextBox();
             textBoxAccTitle = new TextBox();
             textBoxAccCnic = new TextBox();
             label1 = new Label();
+            textBoxFromValue = new TextBox();
+            textBoxToValue = new TextBox();
+            label2 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label_Display_All
             // 
             label_Display_All.AutoSize = true;
-            label_Display_All.Font = new Font("Century Schoolbook", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_Display_All.Location = new Point(328, 9);
+            label_Display_All.Font = new Font("Century Schoolbook", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_Display_All.Location = new Point(290, 30);
             label_Display_All.Name = "label_Display_All";
-            label_Display_All.Size = new Size(501, 28);
+            label_Display_All.Size = new Size(725, 41);
             label_Display_All.TabIndex = 0;
             label_Display_All.Text = "This Shows all Active Accounts in the Bank";
             // 
@@ -125,40 +127,23 @@
             // 
             // BtnAddRecord
             // 
-            BtnAddRecord.Location = new Point(1163, 54);
+            BtnAddRecord.Location = new Point(1131, 51);
             BtnAddRecord.Name = "BtnAddRecord";
-            BtnAddRecord.Size = new Size(85, 30);
+            BtnAddRecord.Size = new Size(117, 48);
             BtnAddRecord.TabIndex = 4;
             BtnAddRecord.Text = "Add New";
             BtnAddRecord.UseVisualStyleBackColor = true;
             BtnAddRecord.Click += BtnAddRecord_Click;
             // 
-            // textBoxSearch
-            // 
-            textBoxSearch.Location = new Point(102, 79);
-            textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(609, 23);
-            textBoxSearch.TabIndex = 5;
-            // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(1173, 90);
+            btnSearch.Location = new Point(1131, 105);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(75, 23);
+            btnSearch.Size = new Size(117, 47);
             btnSearch.TabIndex = 6;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
-            // 
-            // Filters
-            // 
-            Filters.Location = new Point(1173, 119);
-            Filters.Name = "Filters";
-            Filters.Size = new Size(75, 23);
-            Filters.TabIndex = 7;
-            Filters.Text = "Filters";
-            Filters.UseVisualStyleBackColor = true;
-            Filters.Click += Filters_Click;
             // 
             // textBoxAccNum
             // 
@@ -191,19 +176,53 @@
             label1.TabIndex = 11;
             label1.Text = "Search By:";
             // 
+            // textBoxFromValue
+            // 
+            textBoxFromValue.Location = new Point(795, 104);
+            textBoxFromValue.Name = "textBoxFromValue";
+            textBoxFromValue.Size = new Size(100, 23);
+            textBoxFromValue.TabIndex = 12;
+            // 
+            // textBoxToValue
+            // 
+            textBoxToValue.Location = new Point(795, 129);
+            textBoxToValue.Name = "textBoxToValue";
+            textBoxToValue.Size = new Size(100, 23);
+            textBoxToValue.TabIndex = 13;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(748, 112);
+            label2.Name = "label2";
+            label2.Size = new Size(41, 15);
+            label2.TabIndex = 14;
+            label2.Text = "From: ";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(764, 137);
+            label3.Name = "label3";
+            label3.Size = new Size(25, 15);
+            label3.TabIndex = 15;
+            label3.Text = "To: ";
+            // 
             // DisplayForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(textBoxToValue);
+            Controls.Add(textBoxFromValue);
             Controls.Add(label1);
             Controls.Add(textBoxAccCnic);
             Controls.Add(textBoxAccTitle);
             Controls.Add(textBoxAccNum);
-            Controls.Add(Filters);
             Controls.Add(btnSearch);
-            Controls.Add(textBoxSearch);
             Controls.Add(BtnAddRecord);
             Controls.Add(dataGridView1);
             Controls.Add(btn_Menu_DisplayAll);
@@ -222,9 +241,7 @@
         private Button btn_Menu_DisplayAll;
         private DataGridView dataGridView1;
         private Button BtnAddRecord;
-        private TextBox textBoxSearch;
         private Button btnSearch;
-        private Button Filters;
         private DataGridViewTextBoxColumn AccountNumber;
         private DataGridViewTextBoxColumn AccountTitle;
         private DataGridViewTextBoxColumn Cnic;
@@ -235,5 +252,9 @@
         private TextBox textBoxAccTitle;
         private TextBox textBoxAccCnic;
         private Label label1;
+        private TextBox textBoxFromValue;
+        private TextBox textBoxToValue;
+        private Label label2;
+        private Label label3;
     }
 }

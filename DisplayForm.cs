@@ -46,7 +46,7 @@ namespace WinFormsBankingApp
         private void DisplayForm_Load(object sender, EventArgs e)
         {
 
-            RefreshGrid(textBoxSearch.Text);
+            RefreshGrid();
             // LoadAllIntoGrid();
             // Banking.LoadAccountsIntoList();
             // dataGridView1.DataSource = Banking.LoadAccountsIntoList();
@@ -63,7 +63,7 @@ namespace WinFormsBankingApp
             CreateAccountForm add = new CreateAccountForm();
             add.ShowDialog();
 
-            RefreshGrid(textBoxSearch.Text);
+            RefreshGrid();
 
             // Banking.LoadAccountsIntoList();
             // dataGridView1.DataSource = Banking.LoadAccountsIntoList();
@@ -100,7 +100,7 @@ namespace WinFormsBankingApp
 
                 Banking.Remove(rowClicked);
 
-                RefreshGrid(textBoxSearch.Text);
+                 RefreshGrid();
 
                 //  Banking.LoadAccountsIntoList();
                 //  dataGridView1.DataSource = Banking.LoadAccountsIntoList();
@@ -112,7 +112,7 @@ namespace WinFormsBankingApp
             {
                 FormEditRecord record = new FormEditRecord(rowClicked, balanceCurrently2);
                 record.ShowDialog();
-                RefreshGrid(textBoxSearch.Text);
+                RefreshGrid();
 
                 // Banking.LoadAccountsIntoList();
                 // dataGridView1.DataSource = Banking.LoadAccountsIntoList();
@@ -135,12 +135,7 @@ namespace WinFormsBankingApp
             //  RefreshGrid(textBoxSearch.Text);                   // i created this method, because originally i was calling two lines, with the same parameters. that was useless, i didnt need the first line, a method made it easier to change
         }
 
-        private void Filters_Click(object sender, EventArgs e)
-        {
-            Filters filter = new Filters();
-            filter.ShowDialog();
-        }
-
+        
         //  private void LoadAllIntoGrid()
         //  {
         //      dataGridView1.Rows.Clear();                     //to ensure we dont add data again and again 
