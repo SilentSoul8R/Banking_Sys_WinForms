@@ -1,6 +1,6 @@
 # 🏦 Banking Management System  (WinForms + SQL Server)
 
-> A desktop banking application built with **C# WinForms**, backed by **Microsoft SQL Server** (via `Microsoft.Data.SqlClient`), supporting account creation, deposits, withdrawals, editing, deletion, and multi-field filtered search.
+A desktop banking application built with **C# WinForms**, backed by **Microsoft SQL Server** (via `Microsoft.Data.SqlClient`), supporting account creation, deposits, withdrawals, editing, deletion, and multi-field filtered search.
 
 ---
 
@@ -63,7 +63,7 @@ WinFormsBankingApp/
 │ CreateAccountForm              │          │  tblAccounts     │
 │ Deposit                        │          │  (SQL Server)    │
 │ Withdrawal                     │          │  AccNum,         │
-│ DisplayForm ──▶ FormEditRecord │          │  AccTitle,       
+│ DisplayForm ──▶ FormEditRecord │         │   AccTitle,       |
 │      (filters + grid)          │          │  Cnic, Balance   │
 └────────────────────────────────┘          └──────────────────┘
 ```
@@ -87,7 +87,7 @@ public int balance { get; set; }
 
 ---
 
-## 🔎 Filtering — how it works
+## 🔎 Filtering 
 
 `DisplayForm.FilteredLoadIntoGrid()` builds a SQL query **dynamically**, adding only the conditions the user actually filled in:
 
