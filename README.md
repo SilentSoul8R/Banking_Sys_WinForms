@@ -53,19 +53,19 @@ WinFormsBankingApp/
 ## 🧩 Architecture
 
 ```
-┌───────────────┐        uses         ┌──────────────────┐
-│    Form1      │────────────────────▶│      Banking      │
-│ (Dashboard)   │                     │ (static SQL logic) │
-└───────┬───────┘                     └─────────┬──────────┘
-        │ opens                                 │ reads/writes
+┌───────────────┐        uses          ┌────────────────────┐
+│    Form1      │────────────────────▶│     Banking         |
+│ (Dashboard)   │                      │ (static SQL logic) │
+└───────┬───────┘                      └─────────┬──────────┘
+        │ opens                                  │ reads/writes
         ▼                                        ▼
-┌────────────────────────────┐          ┌───────────────┐
-│ CreateAccountForm            │          │  tblAccounts   │
-│ Deposit                      │          │ (SQL Server)   │
-│ Withdrawal                   │          │ AccNum,        │
-│ DisplayForm ──▶ FormEditRecord│         │ AccTitle,      │
-│      (filters + grid)        │          │ Cnic, Balance  │
-└────────────────────────────┘          └───────────────┘
+┌────────────────────────────────┐          ┌──────────────────┐
+│ CreateAccountForm              │          │  tblAccounts     │
+│ Deposit                        │          │  (SQL Server)    │
+│ Withdrawal                     │          │  AccNum,         │
+│ DisplayForm ──▶ FormEditRecord │          │  AccTitle,       
+│      (filters + grid)          │          │  Cnic, Balance   │
+└────────────────────────────────┘          └──────────────────┘
 ```
 
 ### `Account` model
@@ -191,7 +191,18 @@ public static string connectionString =
 
 ## 📜 License
 
-This project is provided as-is for educational purposes. Add your preferred license here.
+This project is provided as-is for educational purposes..
+
+---
+
+## Author:
+
+
+           ┌──────────────────────────┐
+           |                          |
+           |       SilentSoul8R       |
+           |                          |
+           └──────────────────────────┘
 
 ---
 
