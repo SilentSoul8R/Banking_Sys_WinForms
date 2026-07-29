@@ -144,6 +144,7 @@
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
+            btnSearch.MouseDown += btnSearch_MouseDown;
             // 
             // textBoxAccNum
             // 
@@ -151,6 +152,7 @@
             textBoxAccNum.Name = "textBoxAccNum";
             textBoxAccNum.Size = new Size(192, 23);
             textBoxAccNum.TabIndex = 8;
+            textBoxAccNum.KeyDown += textBoxAccNum_KeyDown;
             // 
             // textBoxAccTitle
             // 
@@ -158,6 +160,7 @@
             textBoxAccTitle.Name = "textBoxAccTitle";
             textBoxAccTitle.Size = new Size(192, 23);
             textBoxAccTitle.TabIndex = 9;
+            textBoxAccTitle.KeyDown += textBoxAccTitle_KeyDown;
             // 
             // textBoxAccCnic
             // 
@@ -165,6 +168,7 @@
             textBoxAccCnic.Name = "textBoxAccCnic";
             textBoxAccCnic.Size = new Size(192, 23);
             textBoxAccCnic.TabIndex = 10;
+            textBoxAccCnic.KeyDown += textBoxAccCnic_KeyDown;
             // 
             // label1
             // 
@@ -182,6 +186,7 @@
             textBoxFromValue.Name = "textBoxFromValue";
             textBoxFromValue.Size = new Size(100, 23);
             textBoxFromValue.TabIndex = 12;
+            textBoxFromValue.KeyDown += textBoxFromValue_KeyDown;
             // 
             // textBoxToValue
             // 
@@ -189,6 +194,7 @@
             textBoxToValue.Name = "textBoxToValue";
             textBoxToValue.Size = new Size(100, 23);
             textBoxToValue.TabIndex = 13;
+            textBoxToValue.KeyDown += textBoxToValue_KeyDown;
             // 
             // label2
             // 

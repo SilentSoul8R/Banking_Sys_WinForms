@@ -16,7 +16,7 @@ namespace WinFormsBankingApp
     public partial class DisplayForm : Form
     {
 
-        
+
 
         public string queryFirstHalf = "Select * From tblAccounts";
         public string querySecondHalf = "";
@@ -100,7 +100,7 @@ namespace WinFormsBankingApp
 
                 Banking.Remove(rowClicked);
 
-                 RefreshGrid();
+                RefreshGrid();
 
                 //  Banking.LoadAccountsIntoList();
                 //  dataGridView1.DataSource = Banking.LoadAccountsIntoList();
@@ -135,7 +135,7 @@ namespace WinFormsBankingApp
             //  RefreshGrid(textBoxSearch.Text);                   // i created this method, because originally i was calling two lines, with the same parameters. that was useless, i didnt need the first line, a method made it easier to change
         }
 
-        
+
         //  private void LoadAllIntoGrid()
         //  {
         //      dataGridView1.Rows.Clear();                     //to ensure we dont add data again and again 
@@ -156,61 +156,66 @@ namespace WinFormsBankingApp
         //  accTitle = textBoxAccTitle.Text;
         //  accCnic = textBoxAccCnic.Text;
 
-            //  if (accNum != "" && querySecondHalf.Length == 0)
-            //  {
-            //      querySecondHalf = "AccNum LIKE @accnum";
-            //  }
+        //  if (accNum != "" && querySecondHalf.Length == 0)
+        //  {
+        //      querySecondHalf = "AccNum LIKE @accnum";
+        //  }
 
-            //   if (accNum != "" && querySecondHalf != "")
-            //   {
-            //       querySecondHalf = querySecondHalf + " AND AccNum LIKE @accnum";
-            //   }
+        //   if (accNum != "" && querySecondHalf != "")
+        //   {
+        //       querySecondHalf = querySecondHalf + " AND AccNum LIKE @accnum";
+        //   }
 
-            //  if (accTitle != "" && querySecondHalf != "")
-            //  {
-            //     querySecondHalf = querySecondHalf + " AND AccTitle LIKE @acctitle";
-            //  }
+        //  if (accTitle != "" && querySecondHalf != "")
+        //  {
+        //     querySecondHalf = querySecondHalf + " AND AccTitle LIKE @acctitle";
+        //  }
 
-            //  if (accTitle != "" && querySecondHalf.Length == 0)
-            //  {
-            //      querySecondHalf = "AccTitle LIKE @acctitle";
-            //  }
-
-
-            //  if (accCnic != "" && querySecondHalf != "")
-            //  {
-            //      querySecondHalf = querySecondHalf + " AND Cnic LIKE @acccnic";
-            //  }
-
-            //  if (accCnic != "" && querySecondHalf.Length == 0)
-            //  {
-            //      querySecondHalf = "Cnic LIKE @acccnic";
-            //  }
+        //  if (accTitle != "" && querySecondHalf.Length == 0)
+        //  {
+        //      querySecondHalf = "AccTitle LIKE @acctitle";
+        //  }
 
 
+        //  if (accCnic != "" && querySecondHalf != "")
+        //  {
+        //      querySecondHalf = querySecondHalf + " AND Cnic LIKE @acccnic";
+        //  }
 
-            //  if (querySecondHalf == "")
-            //  {
-            //      queryFinal = queryFirstHalf + " ;";
-            //      MessageBox.Show(queryFinal);
-            //  }
-            //  else
-            //  {
-            //      queryFinal = queryFirstHalf + " WHERE " + querySecondHalf + " ;";
-            //      MessageBox.Show(queryFinal);
+        //  if (accCnic != "" && querySecondHalf.Length == 0)
+        //  {
+        //      querySecondHalf = "Cnic LIKE @acccnic";
+        //  }
 
-            //  }
-            //  }
-        
+
+
+        //  if (querySecondHalf == "")
+        //  {
+        //      queryFinal = queryFirstHalf + " ;";
+        //      MessageBox.Show(queryFinal);
+        //  }
+        //  else
+        //  {
+        //      queryFinal = queryFirstHalf + " WHERE " + querySecondHalf + " ;";
+        //      MessageBox.Show(queryFinal);
+
+        //  }
+        //  }
+
         public List<Account> FilteredLoadIntoGrid()
         {
             string accNum = textBoxAccNum.Text;
             string accTitle = textBoxAccTitle.Text;
             string accCnic = textBoxAccCnic.Text;
+            string rangeFrom = textBoxFromValue.Text;
+            string rangeTo = textBoxToValue.Text;
 
             var conditions = new List<string>();          // starts fresh every call so we can make the string again and again
- 
 
+            if (rangeFrom != "" && rangeTo != "")
+            {
+                conditions.Add("Balance BETWEEN @From AND @To");
+            }
 
             if (accNum != "")                             // these will make it so that we dont have to individualy make em, we can just pick those we have gotten, and just add these. with add comes separators
             {
@@ -219,7 +224,7 @@ namespace WinFormsBankingApp
 
             if (accTitle != "")
             {
-                conditions.Add("AccTitle LIKE @acctitle");        
+                conditions.Add("AccTitle LIKE @acctitle");
             }
 
             if (accCnic != "")
@@ -228,12 +233,12 @@ namespace WinFormsBankingApp
             }
 
             // better to handle ";" inside the string builder
-            
+
 
 
             if (conditions.Count == 0)              // if no conditions, a vanila search
             {
-                queryFinal = queryFirstHalf + ";"; 
+                queryFinal = queryFirstHalf + ";";
             }
             else
             {
@@ -251,14 +256,33 @@ namespace WinFormsBankingApp
 
 
 
-            if (accNum != "")  // this assures we only bother to do stuff like adding % on the sides of the string, only when they exist.
+            if (accNum != "")
+            {   // this assures we only bother to do stuff like adding % on the sides of the string, only when they exist.
                 command.Parameters.AddWithValue("@accnum", "%" + accNum + "%");
+            }
 
             if (accTitle != "")
+            {
                 command.Parameters.AddWithValue("@acctitle", "%" + accTitle + "%");
+            }
 
             if (accCnic != "")
+            {
                 command.Parameters.AddWithValue("@acccnic", "%" + accCnic + "%");
+            }
+
+            if (rangeFrom != "")
+            {
+                command.Parameters.AddWithValue("@From", rangeFrom);
+                if (rangeTo == "")
+                {
+                    command.Parameters.AddWithValue("@To", 100000000);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@To", rangeTo);
+                }
+            }
 
 
 
@@ -270,9 +294,60 @@ namespace WinFormsBankingApp
 
             return accounts;
         }
+
+        private void btnSearch_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void textBoxAccNum_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops the "ding" sound
+                btnSearch_Click(sender, e);
+            }
+        }
+
+        private void textBoxAccTitle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops the "ding" sound
+                btnSearch_Click(sender, e);
+            }
+        }
+
+
+        private void textBoxFromValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops the "ding" sound
+                btnSearch_Click(sender, e);
+            }
+        }
+
+        private void textBoxAccCnic_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops the "ding" sound
+                btnSearch_Click(sender, e);
+            }
+        }
+
+        private void textBoxToValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops the "ding" sound
+                btnSearch_Click(sender, e);
+            }
+        }
     }
 
-    }
+}
 
     
 
