@@ -22,6 +22,11 @@ namespace WinFormsBankingApp
         public string querySecondHalf = "";
         public string queryFinal = "";
 
+
+        private int currentPage = 1;
+        private int pageSize = 15;
+        private int totalPages = 1;
+
         public DisplayForm()
         {
             InitializeComponent();
@@ -130,6 +135,7 @@ namespace WinFormsBankingApp
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            currentPage = 1;
             dataGridView1.DataSource = FilteredLoadIntoGrid();
 
             //  RefreshGrid(textBoxSearch.Text);                   // i created this method, because originally i was calling two lines, with the same parameters. that was useless, i didnt need the first line, a method made it easier to change
@@ -204,96 +210,130 @@ namespace WinFormsBankingApp
 
         public List<Account> FilteredLoadIntoGrid()
         {
+            string pageS = comboBoxPageNumSelect.Text;
+            if (pageS == "")
+            {
+                pageSize = 10;       // this is for defualt when user chooses no option.
+            }
+            else
+            {
+                pageSize = Convert.ToInt32(pageS);   // combo box ka text will have our selected element. Which we will add to list.
+            }
+
+
             string accNum = textBoxAccNum.Text;
             string accTitle = textBoxAccTitle.Text;
             string accCnic = textBoxAccCnic.Text;
             string rangeFrom = textBoxFromValue.Text;
             string rangeTo = textBoxToValue.Text;
 
-            var conditions = new List<string>();          // starts fresh every call so we can make the string again and again
+            var conditions = new List<string>();
 
-            if (rangeFrom != "" && rangeTo != "")  // to ensure we get a complete range for this
-            {
+
+            if (rangeFrom != "" && rangeTo != "")
                 conditions.Add("Balance BETWEEN @From AND @To");
-            }
 
-            if (accNum != "")                             // these will make it so that we dont have to individualy make em, we can just pick those we have gotten, and just add these. with add comes separators
-            {
-                conditions.Add("AccNum LIKE @accnum");    // we can add all these to a list, then add them in the end, by AND as separator
-            }
+            if (accNum != "")
+                conditions.Add("AccNum LIKE @accnum");
 
             if (accTitle != "")
-            {
                 conditions.Add("AccTitle LIKE @acctitle");
-            }
 
             if (accCnic != "")
-            {
                 conditions.Add("Cnic LIKE @acccnic");
-            }
-
-            // better to handle ";" inside the string builder
 
 
+            string whereClause = conditions.Count == 0 ? "" : " WHERE " + string.Join(" AND ", conditions); // lambda function, for if count is zero, then empty where part. if it is not empty then make a WHERE part of the SQL query
 
-            if (conditions.Count == 0)              // if no conditions, a vanila search
+            using var connection = new SqlConnection(DbHelper.connectionString);
+            connection.Open();
+
+
+
+            // total matching rows, using the SAME filter conditions
+            string countQuery = "SELECT COUNT(*) FROM tblAccounts" + whereClause + ";";
+
+            using var countCommand = new SqlCommand(countQuery, connection);
+
+            AddFilterParameters(countCommand, accNum, accTitle, accCnic, rangeFrom, rangeTo);
+
+            int totalRows = (int)countCommand.ExecuteScalar();
+            totalPages = (int)Math.Ceiling(totalRows / (double)pageSize);
+
+
+            if (totalPages == 0)
             {
-                queryFinal = queryFirstHalf + ";";
-            }
-            else
-            {
-                queryFinal = queryFirstHalf + " WHERE " + string.Join(" AND ", conditions) + ";";
+                totalPages = 1;
             }
 
+            if (currentPage > totalPages)
+            {
+                currentPage = totalPages;
+            }
+
+            if (currentPage < 1)
+            {
+                currentPage = 1;
+            }
+
+            //just this page's rows
+
+            int offset = (currentPage - 1) * pageSize;
+
+
+            string dataQuery = "SELECT AccNum, AccTitle, Cnic, Balance FROM tblAccounts"
+                + whereClause
+                + " ORDER BY AccNum OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;";
+
+            using var command = new SqlCommand(dataQuery, connection);
+
+
+            AddFilterParameters(command, accNum, accTitle, accCnic, rangeFrom, rangeTo);
+            command.Parameters.AddWithValue("@Offset", offset);
+            command.Parameters.AddWithValue("@PageSize", pageSize);
 
 
             var accounts = new List<Account>();
-
-            using var connection = new SqlConnection(DbHelper.connectionString);     // normal setting a connection
-            connection.Open();
-
-            using var command = new SqlCommand(queryFinal, connection);  // command is the search query here
-
-
-
-            if (accNum != "")
-            {   // this assures we only bother to do stuff like adding % on the sides of the string, only when they exist.
-                command.Parameters.AddWithValue("@accnum", "%" + accNum + "%");
-            }
-
-            if (accTitle != "")
-            {
-                command.Parameters.AddWithValue("@acctitle", "%" + accTitle + "%");
-            }
-
-            if (accCnic != "")
-            {
-                command.Parameters.AddWithValue("@acccnic", "%" + accCnic + "%");
-            }
-
-            if (rangeFrom != "")
-            {
-                command.Parameters.AddWithValue("@From", rangeFrom);
-                if (rangeTo == "")
-                {
-                    command.Parameters.AddWithValue("@To", 100000000);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("@To", rangeTo);
-                }
-            }
-
-
-
             using var reader = command.ExecuteReader();
+
+
             while (reader.Read())
             {
-                accounts.Add(new Account(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));  // here is the filtered search
+                accounts.Add(new Account(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
             }
+
+            UpdatePageLabel();
 
             return accounts;
         }
+
+
+
+        private void AddFilterParameters(SqlCommand command, string accNum, string accTitle, string accCnic, string rangeFrom, string rangeTo)  // separated the filtering of parameters to make this all cleaner then before.
+        {
+            if (accNum != "")
+                command.Parameters.AddWithValue("@accnum", "%" + accNum + "%");
+
+            if (accTitle != "")
+                command.Parameters.AddWithValue("@acctitle", "%" + accTitle + "%");
+
+            if (accCnic != "")
+                command.Parameters.AddWithValue("@acccnic", "%" + accCnic + "%");
+
+            if (rangeFrom != "" && rangeTo != "")
+            {
+                command.Parameters.AddWithValue("@From", Convert.ToInt32(rangeFrom));
+                command.Parameters.AddWithValue("@To", Convert.ToInt32(rangeTo));
+            }
+        }
+
+
+
+        private void UpdatePageLabel()
+        {
+            lblStatusLabelDisplayGrid.Text = "Page " + currentPage + " of " + totalPages;
+        }
+
 
         private void btnSearch_MouseDown(object sender, MouseEventArgs e)
         {
@@ -344,6 +384,34 @@ namespace WinFormsBankingApp
                 e.SuppressKeyPress = true; // stops the "ding" sound
                 btnSearch_Click(sender, e);
             }
+        }
+
+        private void lblStatusLabelDisplayGrid_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNextDisplayForm_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                RefreshGrid();
+            }
+        }
+
+        private void btnPrevDisplayForm_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                RefreshGrid();
+            }
+        }
+
+        private void comboBoxPageNumSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

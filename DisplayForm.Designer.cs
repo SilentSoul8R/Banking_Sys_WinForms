@@ -49,8 +49,9 @@
             label3 = new Label();
             btnPrevDisplayForm = new Button();
             btnNextDisplayForm = new Button();
-            btnLastDisplayForm = new Button();
             lblStatusLabelDisplayGrid = new Label();
+            comboBoxPageNumSelect = new ComboBox();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -227,6 +228,7 @@
             btnPrevDisplayForm.TabIndex = 16;
             btnPrevDisplayForm.Text = "PREV";
             btnPrevDisplayForm.UseVisualStyleBackColor = true;
+            btnPrevDisplayForm.Click += btnPrevDisplayForm_Click;
             // 
             // btnNextDisplayForm
             // 
@@ -237,25 +239,36 @@
             btnNextDisplayForm.TabIndex = 17;
             btnNextDisplayForm.Text = "NEXT";
             btnNextDisplayForm.UseVisualStyleBackColor = true;
-            // 
-            // btnLastDisplayForm
-            // 
-            btnLastDisplayForm.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnLastDisplayForm.Location = new Point(1179, 529);
-            btnLastDisplayForm.Name = "btnLastDisplayForm";
-            btnLastDisplayForm.Size = new Size(69, 41);
-            btnLastDisplayForm.TabIndex = 18;
-            btnLastDisplayForm.Text = "LAST";
-            btnLastDisplayForm.UseVisualStyleBackColor = true;
+            btnNextDisplayForm.Click += btnNextDisplayForm_Click;
             // 
             // lblStatusLabelDisplayGrid
             // 
             lblStatusLabelDisplayGrid.AutoSize = true;
-            lblStatusLabelDisplayGrid.Location = new Point(55, 140);
+            lblStatusLabelDisplayGrid.Location = new Point(55, 137);
             lblStatusLabelDisplayGrid.Name = "lblStatusLabelDisplayGrid";
             lblStatusLabelDisplayGrid.Size = new Size(162, 15);
             lblStatusLabelDisplayGrid.TabIndex = 19;
             lblStatusLabelDisplayGrid.Text = "Showing: 0 to 100 out of 1000";
+            lblStatusLabelDisplayGrid.Click += lblStatusLabelDisplayGrid_Click;
+            // 
+            // comboBoxPageNumSelect
+            // 
+            comboBoxPageNumSelect.FormattingEnabled = true;
+            comboBoxPageNumSelect.Items.AddRange(new object[] { "10", "25", "50" });
+            comboBoxPageNumSelect.Location = new Point(757, 540);
+            comboBoxPageNumSelect.Name = "comboBoxPageNumSelect";
+            comboBoxPageNumSelect.Size = new Size(248, 23);
+            comboBoxPageNumSelect.TabIndex = 20;
+            comboBoxPageNumSelect.SelectedIndexChanged += comboBoxPageNumSelect_SelectedIndexChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(653, 543);
+            label4.Name = "label4";
+            label4.Size = new Size(85, 15);
+            label4.TabIndex = 21;
+            label4.Text = "Items per Page";
             // 
             // DisplayForm
             // 
@@ -263,8 +276,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
+            Controls.Add(label4);
+            Controls.Add(comboBoxPageNumSelect);
             Controls.Add(lblStatusLabelDisplayGrid);
-            Controls.Add(btnLastDisplayForm);
             Controls.Add(btnNextDisplayForm);
             Controls.Add(btnPrevDisplayForm);
             Controls.Add(label3);
@@ -311,7 +325,8 @@
         private Label label3;
         private Button btnPrevDisplayForm;
         private Button btnNextDisplayForm;
-        private Button btnLastDisplayForm;
         private Label lblStatusLabelDisplayGrid;
+        private ComboBox comboBoxPageNumSelect;
+        private Label label4;
     }
 }
