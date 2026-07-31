@@ -1,3 +1,9 @@
+<div align = center>
+        <img width="350" height="350" alt="1000251199-removebg-preview (1)" src="https://github.com/user-attachments/assets/9c5e32ae-b9da-446f-ba4e-36e1056fb691" />
+        
+
+</div>
+
 # 🏦 Banking Management System  (WinForms + SQL Server)
 
 A desktop banking application built with **C# WinForms**, backed by **Microsoft SQL Server** (via `Microsoft.Data.SqlClient`), supporting account creation, deposits, withdrawals, editing, deletion, and multi-field filtered search.
@@ -210,4 +216,8 @@ This project is provided as-is for educational purposes..
 
 **Built with ❤️ using C# WinForms + SQL Server**
 
+</div>
+
+<div align = center>
+        <img width="350" height="350" alt="1000251199" src="https://github.com/user-attachments/assets/cb71a0ea-373d-46be-bc78-6e718ff5560a" />
 </div>
