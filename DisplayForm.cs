@@ -250,7 +250,7 @@ namespace WinFormsBankingApp
 
 
 
-            // total matching rows, using the SAME filter conditions
+                                                                                                            // total matching rows, using the SAME filter conditions
             string countQuery = "SELECT COUNT(*) FROM tblAccounts" + whereClause + ";";
 
             using var countCommand = new SqlCommand(countQuery, connection);
@@ -276,14 +276,12 @@ namespace WinFormsBankingApp
                 currentPage = 1;
             }
 
-            //just this page's rows
+            
 
-            int offset = (currentPage - 1) * pageSize;
+            int offset = (currentPage - 1) * pageSize; 
 
 
-            string dataQuery = "SELECT AccNum, AccTitle, Cnic, Balance FROM tblAccounts"
-                + whereClause
-                + " ORDER BY AccNum OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;";
+            string dataQuery = "SELECT AccNum, AccTitle, Cnic, Balance FROM tblAccounts" + whereClause + " ORDER BY AccNum OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;";
 
             using var command = new SqlCommand(dataQuery, connection);
 
