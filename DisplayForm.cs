@@ -212,7 +212,7 @@ namespace WinFormsBankingApp
 
             var conditions = new List<string>();          // starts fresh every call so we can make the string again and again
 
-            if (rangeFrom != "" && rangeTo != "")
+            if (rangeFrom != "" && rangeTo != "")  // to ensure we get a complete range for this
             {
                 conditions.Add("Balance BETWEEN @From AND @To");
             }
