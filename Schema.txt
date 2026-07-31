@@ -1,6 +1,0 @@
-CREATE TABLE dbo.BankAccounts (
-    AccNum    VARCHAR(50) NULL,
-    AccTitle  VARCHAR(50) NULL,
-    Cnic      VARCHAR(50) NULL,
-    Balance   INT NULL
-);
