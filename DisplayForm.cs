@@ -250,7 +250,7 @@ namespace WinFormsBankingApp
 
 
 
-                                                                                                            // total matching rows, using the SAME filter conditions
+            // total matching rows, using the SAME filter conditions
             string countQuery = "SELECT COUNT(*) FROM tblAccounts" + whereClause + ";";
 
             using var countCommand = new SqlCommand(countQuery, connection);
@@ -276,9 +276,9 @@ namespace WinFormsBankingApp
                 currentPage = 1;
             }
 
-            
 
-            int offset = (currentPage - 1) * pageSize; 
+
+            int offset = (currentPage - 1) * pageSize;
 
 
             string dataQuery = "SELECT AccNum, AccTitle, Cnic, Balance FROM tblAccounts" + whereClause + " ORDER BY AccNum OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;";
@@ -410,6 +410,13 @@ namespace WinFormsBankingApp
         private void comboBoxPageNumSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            currentPage = totalPages;
+            RefreshGrid();
         }
     }
 

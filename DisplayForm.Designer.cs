@@ -52,6 +52,7 @@
             lblStatusLabelDisplayGrid = new Label();
             comboBoxPageNumSelect = new ComboBox();
             label4 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -270,12 +271,24 @@
             label4.TabIndex = 21;
             label4.Text = "Items per Page";
             // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(1179, 529);
+            button1.Name = "button1";
+            button1.Size = new Size(69, 41);
+            button1.TabIndex = 22;
+            button1.Text = "LAST";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // DisplayForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.vecteezy_white_background_with_blue_geometric_and_white_line_pattern_7677104_1;
             ClientSize = new Size(1298, 582);
+            Controls.Add(button1);
             Controls.Add(label4);
             Controls.Add(comboBoxPageNumSelect);
             Controls.Add(lblStatusLabelDisplayGrid);
@@ -328,5 +341,6 @@
         private Label lblStatusLabelDisplayGrid;
         private ComboBox comboBoxPageNumSelect;
         private Label label4;
+        private Button button1;
     }
 }
